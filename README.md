@@ -62,45 +62,11 @@ The configuration parameters specific to the mediator and the mediator's metadat
       ],
       "defaultChannelConfig": [
         {
-          "name": "THSCP-Mediator-eLMIS",
-          "urlPattern": "^/thscp$",
-          "type": "http",
-          "allow": ["thscp-mediator-elmis"],
-          "routes": [
-            {
-              "name": "THSCP-Mediator-eLMIS Route",
-              "host": "localhost",
-              "port": "3017",
-              "path": "/thscp",
-              "type": "http",
-              "primary": "true"
-            }
-          ]
-        }
-      ]
-    }
-"configDefs": [
-    {
-      "urn": "urn:uuid:e128e2f0-7b2d-11eb-8a60-c55dbb67d116",
-      "version": "0.1.0",
-      "name": "THSCP-Mediator-eLMIS",
-      "description": "A mediator for handling system integration between eLMIS and THSCP",
-      "endpoints": [
-        {
-          "name": "THSCP-Mediator-eLMIS Route",
-          "host": "localhost",
-          "port": "3017",
-          "path": "/thscp",
-          "type": "http"
-        }
-      ],
-      "defaultChannelConfig": [
-        {
-          "name": "THSCP-Mediator-eLMIS",
+          "name": "eLMIS - THSCP Channel",
           "urlPattern": "^/thscp$",
           "type": "http",
           "allow": [
-            "thscp-mediator-elmis"
+            "thscp-mediator-elmis-role"
           ],
           "routes": [
             {

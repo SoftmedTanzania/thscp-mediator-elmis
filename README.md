@@ -81,55 +81,90 @@ The configuration parameters specific to the mediator and the mediator's metadat
     }
 "configDefs": [
     {
-      "param": "destinationConnectionProperties",
-      "displayName": "Destination Connection Properties",
-      "description": "Configuration to set the hostname, port and path for the destination server",
-      "type": "struct",
-      "template": [
+      "urn": "urn:uuid:e128e2f0-7b2d-11eb-8a60-c55dbb67d116",
+      "version": "0.1.0",
+      "name": "THSCP-Mediator-eLMIS",
+      "description": "A mediator for handling system integration between eLMIS and THSCP",
+      "endpoints": [
         {
-          "param": "destinationHost",
-          "displayName": "Destination Host Name",
-          "description": "IP address/hostname of the destination server. e.g 192.168.1.1",
-          "type": "string"
-        },
+          "name": "THSCP-Mediator-eLMIS Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp",
+          "type": "http"
+        }
+      ],
+      "defaultChannelConfig": [
         {
-          "param": "destinationPort",
-          "displayName": "Destination Port Number",
-          "description": "The port number of the destination server. e.g 8080",
-          "type": "number"
-        },
-        {
-          "param": "destinationPath",
-          "displayName": "Destination Path",
-          "description": "The destination path for receiving data from the HIM. eg /hdr",
-          "type": "string"
-        },
-        {
-          "param": "destinationScheme",
-          "displayName": "Destination Scheme",
-          "description": "Whether the destination is using LLP or SLLP requests.",
-          "type": "option",
-          "values": [
-            "llp",
-            "sllp"
+          "name": "THSCP-Mediator-eLMIS",
+          "urlPattern": "^/thscp$",
+          "type": "http",
+          "allow": [
+            "thscp-mediator-elmis"
+          ],
+          "routes": [
+            {
+              "name": "THSCP-Mediator-eLMIS Route",
+              "host": "localhost",
+              "port": "3017",
+              "path": "/thscp",
+              "type": "http",
+              "primary": "true"
+            }
           ]
-        },
+        }
+      ],
+      "configDefs": [
         {
-          "param": "destinationUsername",
-          "displayName": "Destination Username",
-          "description": "The destination username for receiving data from the HIM.",
-          "type": "string"
-        },
-        {
-          "param": "destinationPassword",
-          "displayName": "Destination Password",
-          "description": "The destination password for receiving data from the HIM.",
-          "type": "password"
+          "param": "destinationConnectionProperties",
+          "displayName": "Destination Connection Properties",
+          "description": "Configuration to set the hostname, port and path for the destination server",
+          "type": "struct",
+          "template": [
+            {
+              "param": "destinationHost",
+              "displayName": "Destination Host Name",
+              "description": "IP address/hostname of the destination server. e.g 192.168.1.1",
+              "type": "string"
+            },
+            {
+              "param": "destinationPort",
+              "displayName": "Destination Port Number",
+              "description": "The port number of the destination server. e.g 8080",
+              "type": "number"
+            },
+            {
+              "param": "destinationPath",
+              "displayName": "Destination Path",
+              "description": "The destination path for receiving data from the HIM. eg /hdr",
+              "type": "string"
+            },
+            {
+              "param": "destinationScheme",
+              "displayName": "Destination Scheme",
+              "description": "Whether the destination is using HTTP or HTTPS requests.",
+              "type": "option",
+              "values": [
+                "http",
+                "https"
+              ]
+            },
+            {
+              "param": "destinationUsername",
+              "displayName": "Destination Username",
+              "description": "The destination username for receiving data from the HIM.",
+              "type": "string"
+            },
+            {
+              "param": "destinationPassword",
+              "displayName": "Destination Password",
+              "description": "The destination password for receiving data from the HIM.",
+              "type": "password"
+            }
+          ]
         }
       ]
     }
-  ]
-
 ```
 
 ## 4. Deployment

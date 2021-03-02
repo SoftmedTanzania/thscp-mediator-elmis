@@ -1,10 +1,10 @@
-# National Health Client Registry Mediator
+# eLMIS to Tanzania Health Supply Chain Mediator
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a1052124d49b41ce82d9530f68593ada)](https://app.codacy.com/gh/SoftmedTanzania/nhcr-mediator?utm_source=github.com&utm_medium=referral&utm_content=SoftmedTanzania/nhcr-mediator&utm_campaign=Badge_Grade)
-[![Java CI Badge](https://github.com/SoftmedTanzania/nhcr-mediator/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/SoftmedTanzania/nhcr-mediator/actions?query=workflow%3A%22Java+CI+with+Maven%22)
-[![Coverage Status](https://coveralls.io/repos/github/SoftmedTanzania/nhcr-mediator/badge.svg?branch=development)](https://coveralls.io/github/SoftmedTanzania/nhcr-mediator?branch=development)
 
-An [OpenHIM](http://openhim.org/) mediator for handling system integration with National Health Client Registry.
+[![Java CI Badge](https://github.com/SoftmedTanzania/thscp-mediator-elmis/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/SoftmedTanzania/thscp-mediator-elmis/actions?query=workflow%3A%22Java+CI+with+Maven%22)
+[![Coverage Status](https://coveralls.io/repos/github/SoftmedTanzania/thscp-mediator-elmis/badge.svg?branch=development)](https://coveralls.io/github/SoftmedTanzania/thscp-mediator-elmis?branch=development)
+
+An [OpenHIM](http://openhim.org/) mediator for handling system integration between elMIS and Tanzania Health Supply Chain Mediator.
 
 ## 1. Dev Requirements
 
@@ -14,8 +14,7 @@ An [OpenHIM](http://openhim.org/) mediator for handling system integration with 
 
 ## 2. Mediator Configuration
 
-This mediator is designed to work with multiple systems that send JSON Payloads while communicating with the NHCR via the HIM and the HIM transforms the 
-messages into HL7v2 messages before forwarding the requests to the NHCR
+This mediator is designed to work with eLMIS that send JSON Payloads while communicating with the THSCP via the HIM.
 
 ### 3 Configuration Parameters
 
@@ -24,16 +23,16 @@ The configuration parameters specific to the mediator and destination system can
 `src/main/resources/mediator.properties`
 
 ```
-    mediator.name=NHCR-Mediator
+    # Mediator Properties
+    mediator.name=THSCP-Mediator-eLMIS
     mediator.host=localhost
-    mediator.port=3014
+    mediator.port=3017
     mediator.timeout=60000
     mediator.heartbeats=true
     
-    core.scheme=openhim-scheme
-    core.host=openhim-address
+    core.host=localhost
     core.api.port=8080
-    core.api.user=root@openhim.org
+    core.api.user=openhim-username
     core.api.password=openhim-password
     
     destination.host=destination-system-address
@@ -48,33 +47,31 @@ The configuration parameters specific to the mediator and the mediator's metadat
 
 ```
     {
-      "urn": "urn:uuid:83c54769-5622-4cec-9f58-ccfc0ad24382",
+      "urn": "urn:uuid:e128e2f0-7b2d-11eb-8a60-c55dbb67d116",
       "version": "0.1.0",
-      "name": "NHCR Mediator",
-      "description": "Description",
+      "name": "THSCP-Mediator-eLMIS",
+      "description": "A mediator for handling system integration between eLMIS and THSCP",
       "endpoints": [
         {
-          "name": "NHCR Mediator Route",
+          "name": "THSCP-Mediator-eLMIS Route",
           "host": "localhost",
-          "port": "3014",
-          "path": "/nhcr",
+          "port": "3017",
+          "path": "/thscp",
           "type": "http"
         }
       ],
       "defaultChannelConfig": [
         {
-          "name": "NHCR Mediator",
-          "urlPattern": "^/nhcr",
+          "name": "THSCP-Mediator-eLMIS",
+          "urlPattern": "^/thscp$",
           "type": "http",
-          "allow": [
-            "nhcr-mediator"
-          ],
+          "allow": ["thscp-mediator-elmis"],
           "routes": [
             {
-              "name": "NHCR Mediator Route",
+              "name": "THSCP-Mediator-eLMIS Route",
               "host": "localhost",
-              "port": "3014",
-              "path": "/nhcr",
+              "port": "3017",
+              "path": "/thscp",
               "type": "http",
               "primary": "true"
             }
@@ -82,6 +79,57 @@ The configuration parameters specific to the mediator and the mediator's metadat
         }
       ]
     }
+"configDefs": [
+    {
+      "param": "destinationConnectionProperties",
+      "displayName": "Destination Connection Properties",
+      "description": "Configuration to set the hostname, port and path for the destination server",
+      "type": "struct",
+      "template": [
+        {
+          "param": "destinationHost",
+          "displayName": "Destination Host Name",
+          "description": "IP address/hostname of the destination server. e.g 192.168.1.1",
+          "type": "string"
+        },
+        {
+          "param": "destinationPort",
+          "displayName": "Destination Port Number",
+          "description": "The port number of the destination server. e.g 8080",
+          "type": "number"
+        },
+        {
+          "param": "destinationPath",
+          "displayName": "Destination Path",
+          "description": "The destination path for receiving data from the HIM. eg /hdr",
+          "type": "string"
+        },
+        {
+          "param": "destinationScheme",
+          "displayName": "Destination Scheme",
+          "description": "Whether the destination is using LLP or SLLP requests.",
+          "type": "option",
+          "values": [
+            "llp",
+            "sllp"
+          ]
+        },
+        {
+          "param": "destinationUsername",
+          "displayName": "Destination Username",
+          "description": "The destination username for receiving data from the HIM.",
+          "type": "string"
+        },
+        {
+          "param": "destinationPassword",
+          "displayName": "Destination Password",
+          "description": "The destination password for receiving data from the HIM.",
+          "type": "password"
+        }
+      ]
+    }
+  ]
+
 ```
 
 ## 4. Deployment
@@ -90,5 +138,5 @@ To build and run the mediator after performing the above configurations, run the
 
 ```
   mvn clean package -DskipTests=true -e source:jar javadoc:jar
-  java -jar target/nhcr-mediator-<version>-jar-with-dependencies.jar
+  java -jar target/thscp-mediator-elmis-<version>-jar-with-dependencies.jar
 ```

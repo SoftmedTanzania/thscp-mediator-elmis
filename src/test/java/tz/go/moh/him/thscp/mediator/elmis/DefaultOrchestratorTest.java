@@ -12,6 +12,7 @@ import org.junit.*;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
+import tz.go.moh.him.thscp.mediator.elmis.Orchestration.DefaultOrchestrator;
 
 import static org.junit.Assert.*;
 

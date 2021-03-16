@@ -3,7 +3,7 @@ package tz.go.moh.him.thscp.mediator.elmis.Domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class ForecastAccuracyPerProgram {
+public class StockAvailabilityRequest {
     /**
      * The unique identifier
      */
@@ -12,28 +12,21 @@ public class ForecastAccuracyPerProgram {
     private String uuid;
 
     /**
-     * The consumed quantity
-     */
-    @JsonProperty("consumedQuantity")
-    @SerializedName("consumedQuantity")
-    private int consumedQuantity;
-
-    /**
-     * The facility ID
+     * The facility HFR Id
      */
     @JsonProperty("facilityId")
     @SerializedName("facilityId")
     private String facilityId;
 
     /**
-     * The forecast quantity
+     * The incident
      */
-    @JsonProperty("forecastQuantity")
-    @SerializedName("forecastQuantity")
-    private String forecastQuantity;
+    @JsonProperty("incident")
+    @SerializedName("incident")
+    private String incident;
 
     /**
-     * The date period
+     * The period date
      */
     @JsonProperty("period")
     @SerializedName("period")
@@ -61,14 +54,6 @@ public class ForecastAccuracyPerProgram {
         this.uuid = uuid;
     }
 
-    public int getConsumedQuantity() {
-        return consumedQuantity;
-    }
-
-    public void setConsumedQuantity(int consumedQuantity) {
-        this.consumedQuantity = consumedQuantity;
-    }
-
     public String getFacilityId() {
         return facilityId;
     }
@@ -77,12 +62,12 @@ public class ForecastAccuracyPerProgram {
         this.facilityId = facilityId;
     }
 
-    public String getForecastQuantity() {
-        return forecastQuantity;
+    public String getIncident() {
+        return incident;
     }
 
-    public void setForecastQuantity(String forecastQuantity) {
-        this.forecastQuantity = forecastQuantity;
+    public void setIncident(String incident) {
+        this.incident = incident;
     }
 
     public String getPeriod() {

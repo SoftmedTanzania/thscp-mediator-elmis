@@ -3,7 +3,7 @@ package tz.go.moh.him.thscp.mediator.elmis.Domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class EmergencyCommodityStockStatus {
+public class ForecastAccuracyPerProgramRequest {
     /**
      * The unique identifier
      */
@@ -12,18 +12,25 @@ public class EmergencyCommodityStockStatus {
     private String uuid;
 
     /**
-     * The available quantity
+     * The consumed quantity
      */
-    @JsonProperty("availableQuantity")
-    @SerializedName("availableQuantity")
-    private int availableQuantity;
+    @JsonProperty("consumedQuantity")
+    @SerializedName("consumedQuantity")
+    private int consumedQuantity;
 
     /**
-     * The facility HFR id
+     * The facility ID
      */
-    @JsonProperty("facility_id")
-    @SerializedName("facility_id")
+    @JsonProperty("facilityId")
+    @SerializedName("facilityId")
     private String facilityId;
+
+    /**
+     * The forecast quantity
+     */
+    @JsonProperty("forecastQuantity")
+    @SerializedName("forecastQuantity")
+    private String forecastQuantity;
 
     /**
      * The date period
@@ -46,20 +53,6 @@ public class EmergencyCommodityStockStatus {
     @SerializedName("programCode")
     private String programCode;
 
-    /**
-     * The number of months of stock
-     */
-    @JsonProperty("stockOfMonth")
-    @SerializedName("stockOfMonth")
-    private int stockOfMonth;
-
-    /**
-     * Stock quantity
-     */
-    @JsonProperty("stockQuantity")
-    @SerializedName("stockQuantity")
-    private int stockQuantity;
-
     public String getUuid() {
         return uuid;
     }
@@ -68,12 +61,12 @@ public class EmergencyCommodityStockStatus {
         this.uuid = uuid;
     }
 
-    public int getAvailableQuantity() {
-        return availableQuantity;
+    public int getConsumedQuantity() {
+        return consumedQuantity;
     }
 
-    public void setAvailableQuantity(int availableQuantity) {
-        this.availableQuantity = availableQuantity;
+    public void setConsumedQuantity(int consumedQuantity) {
+        this.consumedQuantity = consumedQuantity;
     }
 
     public String getFacilityId() {
@@ -82,6 +75,14 @@ public class EmergencyCommodityStockStatus {
 
     public void setFacilityId(String facilityId) {
         this.facilityId = facilityId;
+    }
+
+    public String getForecastQuantity() {
+        return forecastQuantity;
+    }
+
+    public void setForecastQuantity(String forecastQuantity) {
+        this.forecastQuantity = forecastQuantity;
     }
 
     public String getPeriod() {
@@ -106,21 +107,5 @@ public class EmergencyCommodityStockStatus {
 
     public void setProgramCode(String programCode) {
         this.programCode = programCode;
-    }
-
-    public int getStockOfMonth() {
-        return stockOfMonth;
-    }
-
-    public void setStockOfMonth(int stockOfMonth) {
-        this.stockOfMonth = stockOfMonth;
-    }
-
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
-
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
     }
 }

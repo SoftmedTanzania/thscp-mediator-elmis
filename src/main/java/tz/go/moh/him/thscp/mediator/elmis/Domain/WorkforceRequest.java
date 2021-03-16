@@ -3,7 +3,7 @@ package tz.go.moh.him.thscp.mediator.elmis.Domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class Workforce {
+public class WorkforceRequest {
     /**
      * The unique identifier
      */

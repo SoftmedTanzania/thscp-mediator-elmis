@@ -3,7 +3,7 @@ package tz.go.moh.him.thscp.mediator.elmis.Domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class StockAvailability {
+public class EmergencyCommodityStockStatusRequest {
     /**
      * The unique identifier
      */
@@ -12,21 +12,21 @@ public class StockAvailability {
     private String uuid;
 
     /**
-     * The facility HFR Id
+     * The available quantity
      */
-    @JsonProperty("facilityId")
-    @SerializedName("facilityId")
+    @JsonProperty("availableQuantity")
+    @SerializedName("availableQuantity")
+    private int availableQuantity;
+
+    /**
+     * The facility HFR id
+     */
+    @JsonProperty("facility_id")
+    @SerializedName("facility_id")
     private String facilityId;
 
     /**
-     * The incident
-     */
-    @JsonProperty("incident")
-    @SerializedName("incident")
-    private String incident;
-
-    /**
-     * The period date
+     * The date period
      */
     @JsonProperty("period")
     @SerializedName("period")
@@ -46,6 +46,20 @@ public class StockAvailability {
     @SerializedName("programCode")
     private String programCode;
 
+    /**
+     * The number of months of stock
+     */
+    @JsonProperty("stockOfMonth")
+    @SerializedName("stockOfMonth")
+    private int stockOfMonth;
+
+    /**
+     * Stock quantity
+     */
+    @JsonProperty("stockQuantity")
+    @SerializedName("stockQuantity")
+    private int stockQuantity;
+
     public String getUuid() {
         return uuid;
     }
@@ -54,20 +68,20 @@ public class StockAvailability {
         this.uuid = uuid;
     }
 
+    public int getAvailableQuantity() {
+        return availableQuantity;
+    }
+
+    public void setAvailableQuantity(int availableQuantity) {
+        this.availableQuantity = availableQuantity;
+    }
+
     public String getFacilityId() {
         return facilityId;
     }
 
     public void setFacilityId(String facilityId) {
         this.facilityId = facilityId;
-    }
-
-    public String getIncident() {
-        return incident;
-    }
-
-    public void setIncident(String incident) {
-        this.incident = incident;
     }
 
     public String getPeriod() {
@@ -92,5 +106,21 @@ public class StockAvailability {
 
     public void setProgramCode(String programCode) {
         this.programCode = programCode;
+    }
+
+    public int getStockOfMonth() {
+        return stockOfMonth;
+    }
+
+    public void setStockOfMonth(int stockOfMonth) {
+        this.stockOfMonth = stockOfMonth;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 }

@@ -1,13 +1,21 @@
 package tz.go.moh.him.thscp.mediator.elmis.Orchestration;
 
+import akka.actor.ActorRef;
+import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpStatus;
 import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
+import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
+import org.openhim.mediator.engine.messages.SimpleMediatorRequest;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
+import tz.go.moh.him.mediator.core.domain.ResultDetail;
+import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +26,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class BaseOrchestrator extends UntypedActor {
+    /**
+     * The serializer.
+     */
+    protected static final JsonSerializer serializer = new JsonSerializer();
+
     /**
      * Possible date formats used by the source systems
      */
@@ -105,4 +118,29 @@ public abstract class BaseOrchestrator extends UntypedActor {
      * @throws Exception if an exception occurs.
      */
     protected abstract void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception;
+
+
+    /**
+     * Method that handles sending of data to the THSCP Actor
+     *
+     * @param objectsList   list of objects to be sent to THSCP
+     * @param resultDetails Result details of the data validation
+     */
+    protected void sendDataToThscp(List<?> objectsList, List<ResultDetail> resultDetails) {
+        // if there are any errors
+        // we need to serialize the results and return
+        if (resultDetails.stream().anyMatch(c -> c.getType() == ResultDetail.ResultsDetailsType.ERROR)) {
+            FinishRequest finishRequest = new FinishRequest(serializer.serializeToString(resultDetails), "application/json", HttpStatus.SC_BAD_REQUEST);
+            ((MediatorHTTPRequest) originalRequest).getRequestHandler().tell(finishRequest, getSelf());
+
+        } else {
+            log.info("Sending data to Thscp Actor");
+            ActorRef actor = getContext().actorOf(Props.create(ThscpActor.class, config));
+            actor.tell(
+                    new SimpleMediatorRequest<>(
+                            originalRequest.getRequestHandler(),
+                            getSelf(),
+                            new Gson().toJson(objectsList)), getSelf());
+        }
+    }
 }

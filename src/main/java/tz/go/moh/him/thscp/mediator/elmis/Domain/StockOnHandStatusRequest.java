@@ -23,14 +23,14 @@ public class StockOnHandStatusRequest {
      */
     @JsonProperty("damagedPercentage")
     @SerializedName("damagedPercentage")
-    private int damagedPercentage;
+    private float damagedPercentage;
 
     /**
      * The expired stock percentage
      */
     @JsonProperty("expiredPercentage")
     @SerializedName("expiredPercentage")
-    private int expiredPercentage;
+    private float expiredPercentage;
 
     /**
      * The facility HFR Id
@@ -44,7 +44,7 @@ public class StockOnHandStatusRequest {
      */
     @JsonProperty("lostPercentage")
     @SerializedName("lostPercentage")
-    private int lostPercentage;
+    private float lostPercentage;
 
     /**
      * The facilityLevel
@@ -111,19 +111,19 @@ public class StockOnHandStatusRequest {
         this.consumedQuantity = consumedQuantity;
     }
 
-    public int getDamagedPercentage() {
+    public float getDamagedPercentage() {
         return damagedPercentage;
     }
 
-    public void setDamagedPercentage(int damagedPercentage) {
+    public void setDamagedPercentage(float damagedPercentage) {
         this.damagedPercentage = damagedPercentage;
     }
 
-    public int getExpiredPercentage() {
+    public float getExpiredPercentage() {
         return expiredPercentage;
     }
 
-    public void setExpiredPercentage(int expiredPercentage) {
+    public void setExpiredPercentage(float expiredPercentage) {
         this.expiredPercentage = expiredPercentage;
     }
 
@@ -135,11 +135,11 @@ public class StockOnHandStatusRequest {
         this.facilityId = facilityId;
     }
 
-    public int getLostPercentage() {
+    public float getLostPercentage() {
         return lostPercentage;
     }
 
-    public void setLostPercentage(int lostPercentage) {
+    public void setLostPercentage(float lostPercentage) {
         this.lostPercentage = lostPercentage;
     }
 

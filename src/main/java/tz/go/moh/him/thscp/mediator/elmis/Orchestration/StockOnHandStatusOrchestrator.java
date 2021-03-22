@@ -1,7 +1,5 @@
 package tz.go.moh.him.thscp.mediator.elmis.Orchestration;
 
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import org.codehaus.plexus.util.StringUtils;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
@@ -13,13 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StockOnHandStatusOrchestrator extends BaseOrchestrator {
-    private final MediatorConfig config;
-    LoggingAdapter log = Logging.getLogger(getContext().system(), this);
-
-
+    /**
+     * Initializes a new instance of the {@link StockOnHandStatusOrchestrator} class.
+     *
+     * @param config The configuration.
+     */
     public StockOnHandStatusOrchestrator(MediatorConfig config) {
         super(config);
-        this.config = config;
     }
 
     @Override
@@ -30,7 +28,7 @@ public class StockOnHandStatusOrchestrator extends BaseOrchestrator {
     }
 
     /**
-     * Validates a Stock Availability request.
+     * Validates a Stock on Hand Status request.
      *
      * @param requests The requests.
      * @return Returns a list of result details.
@@ -44,19 +42,23 @@ public class StockOnHandStatusOrchestrator extends BaseOrchestrator {
             }
 
             if (StringUtils.isEmpty(request.getFacilityId())) {
-                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "partnerIdentification"), null));
+                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "facilityId"), null));
             }
 
             if (StringUtils.isEmpty(request.getPeriod())) {
-                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "scope"), null));
-            }
-
-            if (StringUtils.isEmpty(request.getStockId())) {
-                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "latitude"), null));
+                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "period"), null));
             }
 
             if (StringUtils.isEmpty(request.getProductCode())) {
-                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "longitude"), null));
+                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "productCode"), null));
+            }
+
+            if (StringUtils.isEmpty(request.getProgramCode())) {
+                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "programCode"), null));
+            }
+
+            if (StringUtils.isEmpty(request.getStockId())) {
+                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "stockId"), null));
             }
         }
 

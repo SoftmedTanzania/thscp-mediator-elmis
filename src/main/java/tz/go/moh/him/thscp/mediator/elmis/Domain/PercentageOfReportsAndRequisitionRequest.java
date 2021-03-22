@@ -37,7 +37,7 @@ public class PercentageOfReportsAndRequisitionRequest {
      */
     @JsonProperty("rejectedForms")
     @SerializedName("rejectedForms")
-    private String rejectedForms;
+    private int rejectedForms;
 
     /**
      * The submitted date
@@ -51,7 +51,7 @@ public class PercentageOfReportsAndRequisitionRequest {
      */
     @JsonProperty("submittedForms")
     @SerializedName("submittedForms")
-    private String submittedForms;
+    private int submittedForms;
 
     public String getUuid() {
         return uuid;
@@ -85,11 +85,11 @@ public class PercentageOfReportsAndRequisitionRequest {
         this.program = program;
     }
 
-    public String getRejectedForms() {
+    public int getRejectedForms() {
         return rejectedForms;
     }
 
-    public void setRejectedForms(String rejectedForms) {
+    public void setRejectedForms(int rejectedForms) {
         this.rejectedForms = rejectedForms;
     }
 
@@ -101,11 +101,11 @@ public class PercentageOfReportsAndRequisitionRequest {
         this.submittedAt = submittedAt;
     }
 
-    public String getSubmittedForms() {
+    public int getSubmittedForms() {
         return submittedForms;
     }
 
-    public void setSubmittedForms(String submittedForms) {
+    public void setSubmittedForms(int submittedForms) {
         this.submittedForms = submittedForms;
     }
 }

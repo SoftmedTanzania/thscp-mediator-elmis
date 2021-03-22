@@ -1,3 +1,5 @@
 {
-  "ERR01": ""
+  "NN_ERR01": "'%s' cannot be null or empty",
+  "PARSE_ERR01": "Unable to parse '%s' as a valid '%s'",
+  "RANGE_ERR01": "The %s value of %f must be between %f and %f"
 }

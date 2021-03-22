@@ -28,7 +28,7 @@ public class PercentageOfReportsAndRequisitionOrchestrator extends BaseOrchestra
     }
 
     /**
-     * Validates a Stock Availability request.
+     * Validates a Percentage of Reports and Requisition request.
      *
      * @param requests The requests.
      * @return Returns a list of result details.

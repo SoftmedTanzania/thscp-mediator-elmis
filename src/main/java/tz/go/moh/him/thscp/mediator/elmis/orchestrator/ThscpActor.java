@@ -1,4 +1,4 @@
-package tz.go.moh.him.thscp.mediator.elmis.Orchestration;
+package tz.go.moh.him.thscp.mediator.elmis.orchestrator;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSelection;
@@ -58,7 +58,7 @@ public class ThscpActor extends UntypedActor {
         String path;
         int portNumber;
         if (config.getDynamicConfig().isEmpty()) {
-            if (config.getProperty("destination.secure").equals("true")) {
+            if (config.getProperty("destination.scheme").equals("https")) {
                 scheme = "https";
             } else {
                 scheme = "http";

@@ -1,9 +1,9 @@
-package tz.go.moh.him.thscp.mediator.elmis.Domain;
+package tz.go.moh.him.thscp.mediator.elmis.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class StockAvailabilityRequest {
+public class ForecastAccuracyPerProgramRequest {
     /**
      * The unique identifier
      */
@@ -12,21 +12,28 @@ public class StockAvailabilityRequest {
     private String uuid;
 
     /**
-     * The facility HFR Id
+     * The consumed quantity
+     */
+    @JsonProperty("consumedQuantity")
+    @SerializedName("consumedQuantity")
+    private int consumedQuantity;
+
+    /**
+     * The facility ID
      */
     @JsonProperty("facilityId")
     @SerializedName("facilityId")
     private String facilityId;
 
     /**
-     * The incident
+     * The forecast quantity
      */
-    @JsonProperty("incident")
-    @SerializedName("incident")
-    private String incident;
+    @JsonProperty("forecastQuantity")
+    @SerializedName("forecastQuantity")
+    private String forecastQuantity;
 
     /**
-     * The period date
+     * The date period
      */
     @JsonProperty("period")
     @SerializedName("period")
@@ -54,6 +61,14 @@ public class StockAvailabilityRequest {
         this.uuid = uuid;
     }
 
+    public int getConsumedQuantity() {
+        return consumedQuantity;
+    }
+
+    public void setConsumedQuantity(int consumedQuantity) {
+        this.consumedQuantity = consumedQuantity;
+    }
+
     public String getFacilityId() {
         return facilityId;
     }
@@ -62,12 +77,12 @@ public class StockAvailabilityRequest {
         this.facilityId = facilityId;
     }
 
-    public String getIncident() {
-        return incident;
+    public String getForecastQuantity() {
+        return forecastQuantity;
     }
 
-    public void setIncident(String incident) {
-        this.incident = incident;
+    public void setForecastQuantity(String forecastQuantity) {
+        this.forecastQuantity = forecastQuantity;
     }
 
     public String getPeriod() {

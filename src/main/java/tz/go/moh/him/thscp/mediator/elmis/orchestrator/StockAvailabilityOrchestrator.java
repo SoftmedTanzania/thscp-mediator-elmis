@@ -1,10 +1,10 @@
-package tz.go.moh.him.thscp.mediator.elmis.Orchestration;
+package tz.go.moh.him.thscp.mediator.elmis.orchestrator;
 
 import org.codehaus.plexus.util.StringUtils;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.thscp.mediator.elmis.Domain.StockAvailabilityRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
 
 import java.util.ArrayList;
 import java.util.Arrays;

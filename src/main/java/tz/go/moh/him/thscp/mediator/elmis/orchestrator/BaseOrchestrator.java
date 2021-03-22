@@ -1,4 +1,4 @@
-package tz.go.moh.him.thscp.mediator.elmis.Orchestration;
+package tz.go.moh.him.thscp.mediator.elmis.orchestrator;
 
 import akka.actor.ActorRef;
 import akka.actor.Props;
@@ -34,7 +34,7 @@ public abstract class BaseOrchestrator extends UntypedActor {
     /**
      * Possible date formats used by the source systems
      */
-    private static List<String> formatStrings = Arrays.asList("yyyy-MM-dd HH:mm:ss:ms", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "yyyyMMdd");
+    private static final List<String> formatStrings = Arrays.asList("yyyy-MM-dd HH:mm:ss:ms", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "yyyyMMdd");
 
     /**
      * The mediator configuration.
@@ -105,6 +105,7 @@ public abstract class BaseOrchestrator extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         if (message instanceof MediatorHTTPRequest) {
+            originalRequest = (MediatorHTTPRequest) message;
             this.onReceiveRequestInternal((MediatorHTTPRequest) message);
         } else {
             unhandled(message);
@@ -131,7 +132,7 @@ public abstract class BaseOrchestrator extends UntypedActor {
         // we need to serialize the results and return
         if (resultDetails.stream().anyMatch(c -> c.getType() == ResultDetail.ResultsDetailsType.ERROR)) {
             FinishRequest finishRequest = new FinishRequest(serializer.serializeToString(resultDetails), "application/json", HttpStatus.SC_BAD_REQUEST);
-            ((MediatorHTTPRequest) originalRequest).getRequestHandler().tell(finishRequest, getSelf());
+            originalRequest.getRequestHandler().tell(finishRequest, getSelf());
 
         } else {
             log.info("Sending data to Thscp Actor");

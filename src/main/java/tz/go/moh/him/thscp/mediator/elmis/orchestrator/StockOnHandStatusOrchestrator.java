@@ -1,52 +1,48 @@
-package tz.go.moh.him.thscp.mediator.elmis.Orchestration;
+package tz.go.moh.him.thscp.mediator.elmis.orchestrator;
 
 import org.codehaus.plexus.util.StringUtils;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.thscp.mediator.elmis.Domain.ForecastAccuracyPerProgramRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ForecastAccuracyPerProgramOrchestrator extends BaseOrchestrator {
+public class StockOnHandStatusOrchestrator extends BaseOrchestrator {
     /**
-     * Initializes a new instance of the {@link ForecastAccuracyPerProgramOrchestrator} class.
+     * Initializes a new instance of the {@link StockOnHandStatusOrchestrator} class.
      *
      * @param config The configuration.
      */
-    public ForecastAccuracyPerProgramOrchestrator(MediatorConfig config) {
+    public StockOnHandStatusOrchestrator(MediatorConfig config) {
         super(config);
     }
 
     @Override
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
-        List<ForecastAccuracyPerProgramRequest> forecastAccuracyPerProgramRequests = Arrays.asList(serializer.deserialize(request.getBody(), ForecastAccuracyPerProgramRequest[].class));
+        List<StockOnHandStatusRequest> stockOnHandStatusRequests = Arrays.asList(serializer.deserialize(request.getBody(), StockOnHandStatusRequest[].class));
 
-        sendDataToThscp(forecastAccuracyPerProgramRequests, validateMessage(forecastAccuracyPerProgramRequests));
+        sendDataToThscp(stockOnHandStatusRequests, validateMessage(stockOnHandStatusRequests));
     }
 
     /**
-     * Validates a Forecast Accuracy Per Program request.
+     * Validates a Stock on Hand Status request.
      *
      * @param requests The requests.
      * @return Returns a list of result details.
      */
-    private List<ResultDetail> validateMessage(List<ForecastAccuracyPerProgramRequest> requests) {
+    private List<ResultDetail> validateMessage(List<StockOnHandStatusRequest> requests) {
         ArrayList<ResultDetail> results = new ArrayList<>();
 
-        for (ForecastAccuracyPerProgramRequest request : requests) {
+        for (StockOnHandStatusRequest request : requests) {
             if (StringUtils.isEmpty(request.getUuid())) {
                 results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "uuid"), null));
             }
 
             if (StringUtils.isEmpty(request.getFacilityId())) {
                 results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "facilityId"), null));
-            }
-
-            if (StringUtils.isEmpty(request.getForecastQuantity())) {
-                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "forecastQuantity"), null));
             }
 
             if (StringUtils.isEmpty(request.getPeriod())) {
@@ -59,6 +55,10 @@ public class ForecastAccuracyPerProgramOrchestrator extends BaseOrchestrator {
 
             if (StringUtils.isEmpty(request.getProgramCode())) {
                 results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "programCode"), null));
+            }
+
+            if (StringUtils.isEmpty(request.getStockId())) {
+                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "stockId"), null));
             }
         }
 

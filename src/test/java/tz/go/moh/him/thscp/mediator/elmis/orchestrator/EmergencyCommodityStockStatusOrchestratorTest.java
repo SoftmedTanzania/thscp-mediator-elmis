@@ -1,49 +1,38 @@
-package tz.go.moh.him.thscp.mediator.elmis;
-
+package tz.go.moh.him.thscp.mediator.elmis.orchestrator;
 
 
 import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
-import java.util.Collections;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.*;
-import org.openhim.mediator.engine.MediatorConfig;
+import org.junit.Assert;
+import org.junit.Test;
 import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
-import tz.go.moh.him.thscp.mediator.elmis.Orchestration.DefaultOrchestrator;
 
-import static org.junit.Assert.*;
+import java.io.InputStream;
+import java.util.Collections;
 
-public class DefaultOrchestratorTest {
+import static org.junit.Assert.assertTrue;
 
-    static ActorSystem system;
+/**
+ * Contains tests for the {@link EmergencyCommodityStockStatusOrchestrator} class.
+ */
+public class EmergencyCommodityStockStatusOrchestratorTest extends BaseOrchestratorTest {
 
-    @BeforeClass
-    public static void setup() {
-        system = ActorSystem.create();
-    }
+    /**
+     * Represents the orchestrator.
+     */
+    private final ActorRef orchestrator = system.actorOf(Props.create(EmergencyCommodityStockStatusOrchestrator.class, configuration));
 
-    @AfterClass
-    public static void teardown() {
-        JavaTestKit.shutdownActorSystem(system);
-        system = null;
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
         new JavaTestKit(system) {{
-            final MediatorConfig testConfig = new MediatorConfig("thscp-mediator-elmis", "localhost", 3017);
-            final ActorRef defaultOrchestrator = system.actorOf(Props.create(DefaultOrchestrator.class, testConfig));
+            InputStream stream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("emergency_commodity_stock_statu_request.json");
+
+            Assert.assertNotNull(stream);
 
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
@@ -54,12 +43,12 @@ public class DefaultOrchestratorTest {
                     null,
                     null,
                     "/thscp",
-                    "test message",
-                    Collections.<String, String>singletonMap("Content-Type", "text/plain"),
-                    Collections.<Pair<String, String>>emptyList()
+                    IOUtils.toString(stream),
+                    Collections.singletonMap("Content-Type", "text/plain"),
+                    Collections.emptyList()
             );
 
-            defaultOrchestrator.tell(POST_Request, getRef());
+            orchestrator.tell(POST_Request, getRef());
 
             final Object[] out =
                     new ReceiveWhile<Object>(Object.class, duration("1 second")) {

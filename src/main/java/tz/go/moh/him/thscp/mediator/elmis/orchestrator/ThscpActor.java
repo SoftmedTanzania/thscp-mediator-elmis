@@ -99,7 +99,7 @@ public class ThscpActor extends UntypedActor {
         if (SimpleMediatorRequest.isInstanceOf(String.class, msg)) { //process message
             log.info("Sending data Thscp ...");
             requestHandler = ((SimpleMediatorRequest) msg).getRequestHandler();
-            forwardToThscp(new Gson().toJson(((SimpleMediatorRequest) msg).getRequestObject()));
+            forwardToThscp(((SimpleMediatorRequest) msg).getRequestObject().toString());
 
         } else if (msg instanceof MediatorHTTPResponse) { //respond
             log.info("Received response from THSCP");

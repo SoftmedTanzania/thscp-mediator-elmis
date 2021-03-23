@@ -6,18 +6,13 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openhim.mediator.engine.MediatorConfig;
-import org.openhim.mediator.engine.testing.MockLauncher;
 import org.openhim.mediator.engine.testing.TestingUtils;
-import tz.go.moh.him.thscp.mediator.elmis.mock.MockDestination;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Properties;
 
 public class BaseOrchestratorTest {
@@ -93,17 +88,5 @@ public class BaseOrchestratorTest {
     @After
     public void after() {
         system = ActorSystem.create();
-    }
-
-    /**
-     * Runs initialization before each test execution.
-     */
-    @Before
-    public void before() {
-        List<MockLauncher.ActorToLaunch> actorsToLaunch = new LinkedList<>();
-
-        actorsToLaunch.add(new MockLauncher.ActorToLaunch("http-connector", MockDestination.class));
-
-        TestingUtils.launchActors(system, configuration.getName(), actorsToLaunch);
     }
 }

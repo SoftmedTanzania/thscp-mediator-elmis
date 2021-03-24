@@ -1,6 +1,7 @@
 package tz.go.moh.him.thscp.mediator.elmis.orchestrator;
 
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.testkit.JavaTestKit;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -9,6 +10,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.testing.TestingUtils;
+import tz.go.moh.him.thscp.mediator.elmis.mock.MockDestination;
+import tz.go.moh.him.thscp.mediator.elmis.mock.CustomMockLauncher;
 
 import java.io.File;
 import java.io.IOException;
@@ -88,5 +91,14 @@ public class BaseOrchestratorTest {
     @After
     public void after() {
         system = ActorSystem.create();
+    }
+
+    /**
+     * Sets up the hdr mock actor with the expected message type
+     *
+     * @param expectedMessageType to be verified by the hdr mock in the received request body
+     */
+    protected void setupDestinationMock(String expectedMessageType) {
+        system.actorOf(Props.create(CustomMockLauncher.class, MockDestination.class, expectedMessageType, "http-connector"), configuration.getName());
     }
 }

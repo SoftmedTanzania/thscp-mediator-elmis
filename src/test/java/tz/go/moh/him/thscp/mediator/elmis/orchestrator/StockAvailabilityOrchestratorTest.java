@@ -35,11 +35,10 @@ public class StockAvailabilityOrchestratorTest extends BaseOrchestratorTest {
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = StockAvailabilityOrchestratorTest.class.getClassLoader().getResourceAsStream("stock_availaibility_request.json");
+        Assert.assertNotNull(stream);
+
         new JavaTestKit(system) {{
-            InputStream stream = StockAvailabilityOrchestratorTest.class.getClassLoader().getResourceAsStream("stock_availaibility_request.json");
-
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

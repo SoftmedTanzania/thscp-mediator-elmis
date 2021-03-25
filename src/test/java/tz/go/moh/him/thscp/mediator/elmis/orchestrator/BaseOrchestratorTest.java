@@ -10,8 +10,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.testing.TestingUtils;
-import tz.go.moh.him.thscp.mediator.elmis.mock.MockDestination;
 import tz.go.moh.him.thscp.mediator.elmis.mock.CustomMockLauncher;
+import tz.go.moh.him.thscp.mediator.elmis.mock.MockDestination;
 
 import java.io.File;
 import java.io.IOException;

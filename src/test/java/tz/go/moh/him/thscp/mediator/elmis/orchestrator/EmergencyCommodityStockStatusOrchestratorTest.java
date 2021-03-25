@@ -14,6 +14,7 @@ import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import java.io.InputStream;
 import java.util.Collections;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -35,9 +36,9 @@ public class EmergencyCommodityStockStatusOrchestratorTest extends BaseOrchestra
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("emergency_commodity_stock_statu_request.json");
+        assertNotNull(stream);
         new JavaTestKit(system) {{
-            InputStream stream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("emergency_commodity_stock_statu_request.json");
-
             Assert.assertNotNull(stream);
 
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(

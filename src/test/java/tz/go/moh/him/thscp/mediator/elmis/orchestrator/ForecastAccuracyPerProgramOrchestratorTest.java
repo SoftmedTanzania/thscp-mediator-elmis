@@ -35,11 +35,9 @@ public class ForecastAccuracyPerProgramOrchestratorTest extends BaseOrchestrator
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = ForecastAccuracyPerProgramOrchestratorTest.class.getClassLoader().getResourceAsStream("forecast_accuracy_per_program_request.json");
+        Assert.assertNotNull(stream);
         new JavaTestKit(system) {{
-            InputStream stream = ForecastAccuracyPerProgramOrchestratorTest.class.getClassLoader().getResourceAsStream("forecast_accuracy_per_program_request.json");
-
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

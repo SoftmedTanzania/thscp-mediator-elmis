@@ -35,11 +35,9 @@ public class PercentageOfReportsAndRequisitionOrchestratorTest extends BaseOrche
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = PercentageOfReportsAndRequisitionOrchestratorTest.class.getClassLoader().getResourceAsStream("percentage_of_reports_and_requisition_request.json");
+        Assert.assertNotNull(stream);
         new JavaTestKit(system) {{
-            InputStream stream = PercentageOfReportsAndRequisitionOrchestratorTest.class.getClassLoader().getResourceAsStream("percentage_of_reports_and_requisition_request.json");
-
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

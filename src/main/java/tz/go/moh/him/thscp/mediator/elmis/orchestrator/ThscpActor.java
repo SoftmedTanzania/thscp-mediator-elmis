@@ -5,7 +5,6 @@ import akka.actor.ActorSelection;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-import com.google.gson.Gson;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;

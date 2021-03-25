@@ -35,11 +35,10 @@ public class StockOnHandStatusOrchestratorTest extends BaseOrchestratorTest {
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = StockOnHandStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("stock_on_hand_status_request.json");
+        Assert.assertNotNull(stream);
+
         new JavaTestKit(system) {{
-            InputStream stream = StockOnHandStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("stock_on_hand_status_request.json");
-
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

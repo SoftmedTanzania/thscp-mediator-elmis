@@ -35,11 +35,10 @@ public class TurnAroundTimeOrchestratorTest extends BaseOrchestratorTest {
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = TurnAroundTimeOrchestratorTest.class.getClassLoader().getResourceAsStream("turn_around_time_request.json");
+        Assert.assertNotNull(stream);
+
         new JavaTestKit(system) {{
-            InputStream stream = TurnAroundTimeOrchestratorTest.class.getClassLoader().getResourceAsStream("turn_around_time_request.json");
-
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

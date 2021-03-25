@@ -35,11 +35,10 @@ public class WorkforceOrchestratorTest extends BaseOrchestratorTest {
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = WorkforceOrchestratorTest.class.getClassLoader().getResourceAsStream("workforce_request.json");
+        Assert.assertNotNull(stream);
+
         new JavaTestKit(system) {{
-            InputStream stream = WorkforceOrchestratorTest.class.getClassLoader().getResourceAsStream("workforce_request.json");
-
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

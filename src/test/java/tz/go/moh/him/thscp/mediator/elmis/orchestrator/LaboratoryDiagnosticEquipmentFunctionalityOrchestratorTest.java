@@ -35,11 +35,10 @@ public class LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest extends 
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest.class.getClassLoader().getResourceAsStream("laboratory_diagnostic_equipment.json");
+        Assert.assertNotNull(stream);
+
         new JavaTestKit(system) {{
-            InputStream stream = LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest.class.getClassLoader().getResourceAsStream("laboratory_diagnostic_equipment.json");
-
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

@@ -35,11 +35,10 @@ public class ReportingTimelinessOrchestratorTest extends BaseOrchestratorTest {
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
+        InputStream stream = ReportingTimelinessOrchestratorTest.class.getClassLoader().getResourceAsStream("reporting_timeliness_request.json");
+        Assert.assertNotNull(stream);
+
         new JavaTestKit(system) {{
-            InputStream stream = ReportingTimelinessOrchestratorTest.class.getClassLoader().getResourceAsStream("reporting_timeliness_request.json");
-
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

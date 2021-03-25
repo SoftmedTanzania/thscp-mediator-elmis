@@ -12,6 +12,7 @@ import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.TurnAroundTimeRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.WorkforceRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 
 import java.util.Arrays;
@@ -162,6 +163,15 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals("PR-1", turnAroundTimeRequests.get(0).getProductCode());
             assertEquals("PG-1", turnAroundTimeRequests.get(0).getProgramCode());
             assertEquals(10, turnAroundTimeRequests.get(0).getTargetDays());
+        } else if (expectedMessageType.equals("WorkforceRequest")) {
+            List<WorkforceRequest> workforceRequests = Arrays.asList(serializer.deserialize(msg.getBody(), WorkforceRequest[].class));
+            assertEquals("7da14260-b2c3-4ac6-895b-0fd901d54679", workforceRequests.get(0).getUuid());
+            assertEquals("112702-6", workforceRequests.get(0).getFacilityId());
+            assertEquals("2020-11-29", workforceRequests.get(0).getPeriod());
+            assertEquals("001", workforceRequests.get(0).getPostId());
+            assertEquals("engineer", workforceRequests.get(0).getPostName());
+            assertEquals(10, workforceRequests.get(0).getTotalPost());
+            assertEquals(3, workforceRequests.get(0).getVacantPost());
         }
     }
 }

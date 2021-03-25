@@ -182,6 +182,8 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals(10, workforceRequests.get(0).getTotalPost());
                 assertEquals(3, workforceRequests.get(0).getVacantPost());
                 break;
+            default:
+                break;
         }
     }
 }

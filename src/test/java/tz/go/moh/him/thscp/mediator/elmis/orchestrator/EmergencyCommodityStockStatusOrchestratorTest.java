@@ -5,7 +5,6 @@ import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
 import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhim.mediator.engine.messages.FinishRequest;
@@ -39,8 +38,6 @@ public class EmergencyCommodityStockStatusOrchestratorTest extends BaseOrchestra
         InputStream stream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("emergency_commodity_stock_statu_request.json");
         assertNotNull(stream);
         new JavaTestKit(system) {{
-            Assert.assertNotNull(stream);
-
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
                     getRef(),

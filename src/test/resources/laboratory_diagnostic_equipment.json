@@ -1,0 +1,10 @@
+[
+  {
+    "uuid": "ca0ed2a6-3e6e-419e-809a-5ddecf58f63d",
+    "equipmentName": "flask",
+    "facilityId": "112702-6",
+    "installedDate": "2020-11-29",
+    "quantity": 100,
+    "status": "GOOD"
+  }
+]

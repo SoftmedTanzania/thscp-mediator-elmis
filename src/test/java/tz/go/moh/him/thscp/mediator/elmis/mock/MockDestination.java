@@ -11,6 +11,7 @@ import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisiti
 import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.TurnAroundTimeRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 
 import java.util.Arrays;
@@ -145,6 +146,22 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals("PC-02", stockOnHandStatusRequests.get(0).getProgramCode());
             assertEquals(100, stockOnHandStatusRequests.get(0).getQuantity());
             assertEquals("001", stockOnHandStatusRequests.get(0).getStockId());
+        } else if (expectedMessageType.equals("TurnAroundTimeRequest")) {
+            List<TurnAroundTimeRequest> turnAroundTimeRequests = Arrays.asList(serializer.deserialize(msg.getBody(), TurnAroundTimeRequest[].class));
+            assertEquals("7da14260-b2c3-4ac6-895b-0fd901d54679", turnAroundTimeRequests.get(0).getUuid());
+            assertEquals(10, turnAroundTimeRequests.get(0).getDeliveredQuantity());
+            assertEquals("2020-11-19", turnAroundTimeRequests.get(0).getDeliveryDate());
+            assertEquals("123456", turnAroundTimeRequests.get(0).getDeliveryFromFacilityId());
+            assertEquals("2020-11-19", turnAroundTimeRequests.get(0).getDeliveryPromiseDate());
+            assertEquals("2020-11-19", turnAroundTimeRequests.get(0).getOrderDate());
+            assertEquals("123456", turnAroundTimeRequests.get(0).getOrderFromFacilityId());
+            assertEquals("OD-123", turnAroundTimeRequests.get(0).getOrderId());
+            assertEquals("received", turnAroundTimeRequests.get(0).getOrderStatus());
+            assertEquals("emergency", turnAroundTimeRequests.get(0).getOrderType());
+            assertEquals(10, turnAroundTimeRequests.get(0).getOrderedQuantity());
+            assertEquals("PR-1", turnAroundTimeRequests.get(0).getProductCode());
+            assertEquals("PG-1", turnAroundTimeRequests.get(0).getProgramCode());
+            assertEquals(10, turnAroundTimeRequests.get(0).getTargetDays());
         }
     }
 }

@@ -45,10 +45,6 @@ public class ForecastAccuracyPerProgramOrchestrator extends BaseOrchestrator {
                 results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "facilityId"), null));
             }
 
-            if (StringUtils.isEmpty(request.getForecastQuantity())) {
-                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "forecastQuantity"), null));
-            }
-
             if (StringUtils.isEmpty(request.getPeriod())) {
                 results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "period"), null));
             }

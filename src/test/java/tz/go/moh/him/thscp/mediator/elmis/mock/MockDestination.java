@@ -5,6 +5,9 @@ import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.testing.MockHTTPConnector;
 import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import tz.go.moh.him.thscp.mediator.elmis.domain.EmergencyCommodityStockStatusRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.ForecastAccuracyPerProgramRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.LaboratoryDiagnosticEquipmentFunctionalityRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 
 import java.util.Arrays;
@@ -83,6 +86,32 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals("PG-1", emergencyCommodityStockStatusRequestList.get(0).getProgramCode());
             assertEquals(40, emergencyCommodityStockStatusRequestList.get(0).getStockOfMonth());
             assertEquals(50, emergencyCommodityStockStatusRequestList.get(0).getStockQuantity());
+        } else if (expectedMessageType.equals("ForecastAccuracyPerProgramRequest")) {
+            List<ForecastAccuracyPerProgramRequest> forecastAccuracyPerProgramRequests = Arrays.asList(serializer.deserialize(msg.getBody(), ForecastAccuracyPerProgramRequest[].class));
+            assertEquals("8491c5af-24b9-498c-b8a9-5dc711d2d452", forecastAccuracyPerProgramRequests.get(0).getUuid());
+            assertEquals(20, forecastAccuracyPerProgramRequests.get(0).getConsumedQuantity());
+            assertEquals("106091-2", forecastAccuracyPerProgramRequests.get(0).getFacilityId());
+            assertEquals(10, forecastAccuracyPerProgramRequests.get(0).getForecastQuantity());
+            assertEquals("2020-11-25", forecastAccuracyPerProgramRequests.get(0).getPeriod());
+            assertEquals("PR-1", forecastAccuracyPerProgramRequests.get(0).getProductCode());
+            assertEquals("PG-1", forecastAccuracyPerProgramRequests.get(0).getProgramCode());
+        } else if (expectedMessageType.equals("LaboratoryDiagnosticEquipmentFunctionalityRequest")) {
+            List<LaboratoryDiagnosticEquipmentFunctionalityRequest> laboratoryDiagnosticEquipmentFunctionalityRequests = Arrays.asList(serializer.deserialize(msg.getBody(), LaboratoryDiagnosticEquipmentFunctionalityRequest[].class));
+            assertEquals("ca0ed2a6-3e6e-419e-809a-5ddecf58f63d", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getUuid());
+            assertEquals("flask", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getEquipmentName());
+            assertEquals("112702-6", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getFacilityId());
+            assertEquals("2020-11-29", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getInstalledDate());
+            assertEquals(100, laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getQuantity());
+            assertEquals("GOOD", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getStatus());
+        } else if (expectedMessageType.equals("PercentageOfReportsAndRequisitionRequest")) {
+            List<PercentageOfReportsAndRequisitionRequest> percentageOfReportsAndRequisitionRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PercentageOfReportsAndRequisitionRequest[].class));
+            assertEquals("4d4e4fd4-561a-4879-bd7c-2783d9d0edf4", percentageOfReportsAndRequisitionRequests.get(0).getUuid());
+            assertEquals("123456", percentageOfReportsAndRequisitionRequests.get(0).getFacilityId());
+            assertEquals("2020-11-13", percentageOfReportsAndRequisitionRequests.get(0).getPeriod());
+            assertEquals("program name", percentageOfReportsAndRequisitionRequests.get(0).getProgram());
+            assertEquals(10, percentageOfReportsAndRequisitionRequests.get(0).getRejectedForms());
+            assertEquals("2020-11-13", percentageOfReportsAndRequisitionRequests.get(0).getSubmittedAt());
+            assertEquals("15", percentageOfReportsAndRequisitionRequests.get(0).getSubmittedForms());
         }
     }
 }

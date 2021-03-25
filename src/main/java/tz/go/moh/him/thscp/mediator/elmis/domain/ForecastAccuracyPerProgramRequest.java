@@ -30,7 +30,7 @@ public class ForecastAccuracyPerProgramRequest {
      */
     @JsonProperty("forecastQuantity")
     @SerializedName("forecastQuantity")
-    private String forecastQuantity;
+    private int forecastQuantity;
 
     /**
      * The date period
@@ -77,11 +77,11 @@ public class ForecastAccuracyPerProgramRequest {
         this.facilityId = facilityId;
     }
 
-    public String getForecastQuantity() {
+    public int getForecastQuantity() {
         return forecastQuantity;
     }
 
-    public void setForecastQuantity(String forecastQuantity) {
+    public void setForecastQuantity(int forecastQuantity) {
         this.forecastQuantity = forecastQuantity;
     }
 

@@ -9,6 +9,7 @@ import tz.go.moh.him.thscp.mediator.elmis.domain.ForecastAccuracyPerProgramReque
 import tz.go.moh.him.thscp.mediator.elmis.domain.LaboratoryDiagnosticEquipmentFunctionalityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 
 import java.util.Arrays;
@@ -120,6 +121,14 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals(5, reportingTimelinessRequests.get(0).getExpected());
             assertEquals("2020-11-13", reportingTimelinessRequests.get(0).getPeriod());
             assertEquals("COVID", reportingTimelinessRequests.get(0).getProgram());
+        } else if (expectedMessageType.equals("StockAvailabilityOrchestratorRequest")) {
+            List<StockAvailabilityRequest> stockAvailabilityRequests = Arrays.asList(serializer.deserialize(msg.getBody(), StockAvailabilityRequest[].class));
+            assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockAvailabilityRequests.get(0).getUuid());
+            assertEquals("106091-2", stockAvailabilityRequests.get(0).getFacilityId());
+            assertEquals("incident", stockAvailabilityRequests.get(0).getIncident());
+            assertEquals("2021-01-21T05:30:12.481Z", stockAvailabilityRequests.get(0).getPeriod());
+            assertEquals("PR-01", stockAvailabilityRequests.get(0).getProductCode());
+            assertEquals("PC-02", stockAvailabilityRequests.get(0).getProgramCode());
         }
     }
 }

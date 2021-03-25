@@ -8,6 +8,7 @@ import tz.go.moh.him.thscp.mediator.elmis.domain.EmergencyCommodityStockStatusRe
 import tz.go.moh.him.thscp.mediator.elmis.domain.ForecastAccuracyPerProgramRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.LaboratoryDiagnosticEquipmentFunctionalityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 
 import java.util.Arrays;
@@ -112,6 +113,13 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals(10, percentageOfReportsAndRequisitionRequests.get(0).getRejectedForms());
             assertEquals("2020-11-13", percentageOfReportsAndRequisitionRequests.get(0).getSubmittedAt());
             assertEquals(15, percentageOfReportsAndRequisitionRequests.get(0).getSubmittedForms());
+        } else if (expectedMessageType.equals("ReportingTimelinessOrchestratorRequest")) {
+            List<ReportingTimelinessRequest> reportingTimelinessRequests = Arrays.asList(serializer.deserialize(msg.getBody(), ReportingTimelinessRequest[].class));
+            assertEquals("61ee3f67-992c-432b-8536-2b89aa3165a8", reportingTimelinessRequests.get(0).getUuid());
+            assertEquals("Kigoma", reportingTimelinessRequests.get(0).getDistrict());
+            assertEquals(5, reportingTimelinessRequests.get(0).getExpected());
+            assertEquals("2020-11-13", reportingTimelinessRequests.get(0).getPeriod());
+            assertEquals("COVID", reportingTimelinessRequests.get(0).getProgram());
         }
     }
 }

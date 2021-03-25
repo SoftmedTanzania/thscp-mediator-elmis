@@ -98,8 +98,8 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals("106091-2", forecastAccuracyPerProgramRequests.get(0).getFacilityId());
             assertEquals(10, forecastAccuracyPerProgramRequests.get(0).getForecastQuantity());
             assertEquals("2020-11-25", forecastAccuracyPerProgramRequests.get(0).getPeriod());
-            assertEquals("PR-1", forecastAccuracyPerProgramRequests.get(0).getProductCode());
-            assertEquals("PG-1", forecastAccuracyPerProgramRequests.get(0).getProgramCode());
+            assertEquals("PR-01", forecastAccuracyPerProgramRequests.get(0).getProductCode());
+            assertEquals("PC-01", forecastAccuracyPerProgramRequests.get(0).getProgramCode());
         } else if (expectedMessageType.equals("LaboratoryDiagnosticEquipmentFunctionalityRequest")) {
             List<LaboratoryDiagnosticEquipmentFunctionalityRequest> laboratoryDiagnosticEquipmentFunctionalityRequests = Arrays.asList(serializer.deserialize(msg.getBody(), LaboratoryDiagnosticEquipmentFunctionalityRequest[].class));
             assertEquals("ca0ed2a6-3e6e-419e-809a-5ddecf58f63d", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getUuid());
@@ -135,16 +135,16 @@ public class MockDestination extends MockHTTPConnector {
         } else if (expectedMessageType.equals("StockOnHandStatusRequest")) {
             List<StockOnHandStatusRequest> stockOnHandStatusRequests = Arrays.asList(serializer.deserialize(msg.getBody(), StockOnHandStatusRequest[].class));
             assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockOnHandStatusRequests.get(0).getUuid());
-            assertEquals(10, stockOnHandStatusRequests.get(0).getDamagedPercentage());
-            assertEquals(0, stockOnHandStatusRequests.get(0).getConsumedQuantity());
-            assertEquals(0, stockOnHandStatusRequests.get(0).getExpiredPercentage());
+            assertEquals(0, stockOnHandStatusRequests.get(0).getDamagedPercentage(), 0.001);
+            assertEquals(10, stockOnHandStatusRequests.get(0).getConsumedQuantity());
+            assertEquals(0, stockOnHandStatusRequests.get(0).getExpiredPercentage(), 0.001);
             assertEquals("106091-2", stockOnHandStatusRequests.get(0).getFacilityId());
-            assertEquals(0, stockOnHandStatusRequests.get(0).getLostPercentage());
+            assertEquals(0, stockOnHandStatusRequests.get(0).getLostPercentage(), 0.001);
             assertEquals(0, stockOnHandStatusRequests.get(0).getFacilityLevel());
             assertEquals(10, stockOnHandStatusRequests.get(0).getMonthsOfStock());
             assertEquals("2020-12-07", stockOnHandStatusRequests.get(0).getPeriod());
             assertEquals("PR-01", stockOnHandStatusRequests.get(0).getProductCode());
-            assertEquals("PC-02", stockOnHandStatusRequests.get(0).getProgramCode());
+            assertEquals("PC-01", stockOnHandStatusRequests.get(0).getProgramCode());
             assertEquals(100, stockOnHandStatusRequests.get(0).getQuantity());
             assertEquals("001", stockOnHandStatusRequests.get(0).getStockId());
         } else if (expectedMessageType.equals("TurnAroundTimeRequest")) {
@@ -165,7 +165,7 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals(10, turnAroundTimeRequests.get(0).getTargetDays());
         } else if (expectedMessageType.equals("WorkforceRequest")) {
             List<WorkforceRequest> workforceRequests = Arrays.asList(serializer.deserialize(msg.getBody(), WorkforceRequest[].class));
-            assertEquals("7da14260-b2c3-4ac6-895b-0fd901d54679", workforceRequests.get(0).getUuid());
+            assertEquals("53af81dd-d3ae-44ab-86fd-8ed07f0389eb", workforceRequests.get(0).getUuid());
             assertEquals("112702-6", workforceRequests.get(0).getFacilityId());
             assertEquals("2020-11-29", workforceRequests.get(0).getPeriod());
             assertEquals("001", workforceRequests.get(0).getPostId());

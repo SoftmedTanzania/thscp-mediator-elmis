@@ -111,7 +111,7 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals("program name", percentageOfReportsAndRequisitionRequests.get(0).getProgram());
             assertEquals(10, percentageOfReportsAndRequisitionRequests.get(0).getRejectedForms());
             assertEquals("2020-11-13", percentageOfReportsAndRequisitionRequests.get(0).getSubmittedAt());
-            assertEquals("15", percentageOfReportsAndRequisitionRequests.get(0).getSubmittedForms());
+            assertEquals(15, percentageOfReportsAndRequisitionRequests.get(0).getSubmittedForms());
         }
     }
 }

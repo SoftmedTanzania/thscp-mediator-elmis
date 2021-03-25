@@ -10,6 +10,7 @@ import tz.go.moh.him.thscp.mediator.elmis.domain.LaboratoryDiagnosticEquipmentFu
 import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 
 import java.util.Arrays;
@@ -129,6 +130,21 @@ public class MockDestination extends MockHTTPConnector {
             assertEquals("2021-01-21T05:30:12.481Z", stockAvailabilityRequests.get(0).getPeriod());
             assertEquals("PR-01", stockAvailabilityRequests.get(0).getProductCode());
             assertEquals("PC-02", stockAvailabilityRequests.get(0).getProgramCode());
+        } else if (expectedMessageType.equals("StockOnHandStatusRequest")) {
+            List<StockOnHandStatusRequest> stockOnHandStatusRequests = Arrays.asList(serializer.deserialize(msg.getBody(), StockOnHandStatusRequest[].class));
+            assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockOnHandStatusRequests.get(0).getUuid());
+            assertEquals(10, stockOnHandStatusRequests.get(0).getDamagedPercentage());
+            assertEquals(0, stockOnHandStatusRequests.get(0).getConsumedQuantity());
+            assertEquals(0, stockOnHandStatusRequests.get(0).getExpiredPercentage());
+            assertEquals("106091-2", stockOnHandStatusRequests.get(0).getFacilityId());
+            assertEquals(0, stockOnHandStatusRequests.get(0).getLostPercentage());
+            assertEquals(0, stockOnHandStatusRequests.get(0).getFacilityLevel());
+            assertEquals(10, stockOnHandStatusRequests.get(0).getMonthsOfStock());
+            assertEquals("2020-12-07", stockOnHandStatusRequests.get(0).getPeriod());
+            assertEquals("PR-01", stockOnHandStatusRequests.get(0).getProductCode());
+            assertEquals("PC-02", stockOnHandStatusRequests.get(0).getProgramCode());
+            assertEquals(100, stockOnHandStatusRequests.get(0).getQuantity());
+            assertEquals("001", stockOnHandStatusRequests.get(0).getStockId());
         }
     }
 }

@@ -6,7 +6,6 @@ import akka.actor.Props;
 import akka.testkit.JavaTestKit;
 import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhim.mediator.engine.messages.FinishRequest;
@@ -15,6 +14,9 @@ import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Contains tests for the {@link LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest} class.
@@ -36,7 +38,7 @@ public class LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest extends 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
         InputStream stream = LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest.class.getClassLoader().getResourceAsStream("laboratory_diagnostic_equipment.json");
-        Assert.assertNotNull(stream);
+        assertNotNull(stream);
 
         new JavaTestKit(system) {{
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
@@ -68,14 +70,14 @@ public class LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest extends 
 
             InputStream responseStream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("success_response.json");
 
-            Assert.assertNotNull(responseStream);
+            assertNotNull(responseStream);
 
             String expectedResponse = IOUtils.toString(responseStream);
 
-            Assert.assertNotNull(expectedResponse);
+            assertNotNull(expectedResponse);
 
-            Assert.assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
-            Assert.assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
+            assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
+            assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
         }};
     }
 }

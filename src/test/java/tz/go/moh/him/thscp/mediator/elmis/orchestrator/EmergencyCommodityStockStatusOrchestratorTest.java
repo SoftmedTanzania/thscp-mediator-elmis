@@ -6,7 +6,6 @@ import akka.actor.Props;
 import akka.testkit.JavaTestKit;
 import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhim.mediator.engine.messages.FinishRequest;
@@ -17,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Contains tests for the {@link EmergencyCommodityStockStatusOrchestrator} class.
@@ -69,14 +69,14 @@ public class EmergencyCommodityStockStatusOrchestratorTest extends BaseOrchestra
 
             InputStream responseStream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("success_response.json");
 
-            Assert.assertNotNull(responseStream);
+            assertNotNull(responseStream);
 
             String expectedResponse = IOUtils.toString(responseStream);
 
-            Assert.assertNotNull(expectedResponse);
+            assertNotNull(expectedResponse);
 
-            Assert.assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
-            Assert.assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
+            assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
+            assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
         }};
     }
 }

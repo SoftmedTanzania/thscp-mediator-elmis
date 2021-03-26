@@ -16,6 +16,9 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Contains tests for the {@link StockOnHandStatusOrchestrator} class.
  */
@@ -36,7 +39,7 @@ public class StockOnHandStatusOrchestratorTest extends BaseOrchestratorTest {
     @Test
     public void testMediatorHTTPRequest() throws Exception {
         InputStream stream = StockOnHandStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("stock_on_hand_status_request.json");
-        Assert.assertNotNull(stream);
+        assertNotNull(stream);
 
         new JavaTestKit(system) {{
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
@@ -68,14 +71,14 @@ public class StockOnHandStatusOrchestratorTest extends BaseOrchestratorTest {
 
             InputStream responseStream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("success_response.json");
 
-            Assert.assertNotNull(responseStream);
+            assertNotNull(responseStream);
 
             String expectedResponse = IOUtils.toString(responseStream);
 
-            Assert.assertNotNull(expectedResponse);
+            assertNotNull(expectedResponse);
 
-            Assert.assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
-            Assert.assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
+            assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
+            assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
         }};
     }
 }

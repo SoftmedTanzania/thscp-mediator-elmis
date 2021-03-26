@@ -4,6 +4,7 @@ package tz.go.moh.him.thscp.mediator.elmis.orchestrator;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
+import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,9 +13,8 @@ import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Collections;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Contains tests for the {@link TurnAroundTimeOrchestrator} class.
@@ -66,15 +66,16 @@ public class TurnAroundTimeOrchestratorTest extends BaseOrchestratorTest {
                         }
                     }.get();
 
-            boolean foundResponse = false;
+            InputStream responseStream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("success_response.json");
 
-            for (Object o : out) {
-                if (o instanceof FinishRequest) {
-                    foundResponse = true;
-                }
-            }
+            Assert.assertNotNull(responseStream);
 
-            assertTrue("Must send FinishRequest", foundResponse);
+            String expectedResponse = IOUtils.toString(responseStream);
+
+            Assert.assertNotNull(expectedResponse);
+
+            Assert.assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
+            Assert.assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
         }};
     }
 }

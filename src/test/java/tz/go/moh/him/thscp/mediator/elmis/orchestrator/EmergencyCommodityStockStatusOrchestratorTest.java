@@ -4,13 +4,16 @@ package tz.go.moh.him.thscp.mediator.elmis.orchestrator;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
+import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.junit.Assert.assertNotNull;
@@ -73,7 +76,16 @@ public class EmergencyCommodityStockStatusOrchestratorTest extends BaseOrchestra
                 }
             }
 
-            assertTrue("Must send FinishRequest", foundResponse);
+            InputStream responseStream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("success_response.json");
+
+            Assert.assertNotNull(responseStream);
+
+            String expectedResponse = IOUtils.toString(responseStream);
+
+            Assert.assertNotNull(expectedResponse);
+
+            Assert.assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
+            Assert.assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
         }};
     }
 }

@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Contains tests for the {@link EmergencyCommodityStockStatusOrchestrator} class.
@@ -67,14 +66,6 @@ public class EmergencyCommodityStockStatusOrchestratorTest extends BaseOrchestra
                             throw noMatch();
                         }
                     }.get();
-
-            boolean foundResponse = false;
-
-            for (Object o : out) {
-                if (o instanceof FinishRequest) {
-                    foundResponse = true;
-                }
-            }
 
             InputStream responseStream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("success_response.json");
 

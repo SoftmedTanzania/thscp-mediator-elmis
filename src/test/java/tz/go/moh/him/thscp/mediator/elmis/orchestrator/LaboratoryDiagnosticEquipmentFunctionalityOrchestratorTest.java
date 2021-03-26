@@ -80,4 +80,50 @@ public class LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest extends 
             assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
         }};
     }
+
+
+    @Test
+    public void testBadRequest() throws Exception {
+        InputStream stream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("emergency_commodity_stock_statu_request.json");
+        assertNotNull(stream);
+        new JavaTestKit(system) {{
+            MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
+                    getRef(),
+                    getRef(),
+                    "unit-test",
+                    "POST",
+                    "http",
+                    null,
+                    null,
+                    "/thscp",
+                    "[{}]",
+                    Collections.singletonMap("Content-Type", "text/plain"),
+                    Collections.emptyList()
+            );
+
+            orchestrator.tell(POST_Request, getRef());
+
+            final Object[] out =
+                    new ReceiveWhile<Object>(Object.class, duration("1 second")) {
+                        @Override
+                        protected Object match(Object msg) throws Exception {
+                            if (msg instanceof FinishRequest) {
+                                return msg;
+                            }
+                            throw noMatch();
+                        }
+                    }.get();
+
+            InputStream responseStream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("success_response.json");
+
+            assertNotNull(responseStream);
+
+            String expectedResponse = IOUtils.toString(responseStream);
+
+            assertNotNull(expectedResponse);
+
+            assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
+            assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && 400 == ((FinishRequest) c).getResponseStatus()));
+        }};
+    }
 }

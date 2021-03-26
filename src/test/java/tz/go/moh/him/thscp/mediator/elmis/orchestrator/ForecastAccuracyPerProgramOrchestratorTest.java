@@ -83,8 +83,7 @@ public class ForecastAccuracyPerProgramOrchestratorTest extends BaseOrchestrator
 
     @Test
     public void testBadRequest() throws Exception {
-        InputStream stream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("emergency_commodity_stock_statu_request.json");
-        assertNotNull(stream);
+        assertNotNull(system);
         new JavaTestKit(system) {{
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),

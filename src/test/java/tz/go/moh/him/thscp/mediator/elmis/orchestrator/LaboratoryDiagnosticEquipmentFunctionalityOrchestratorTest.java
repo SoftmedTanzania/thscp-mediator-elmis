@@ -84,8 +84,7 @@ public class LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest extends 
 
     @Test
     public void testBadRequest() throws Exception {
-        InputStream stream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("emergency_commodity_stock_statu_request.json");
-        assertNotNull(stream);
+        assertNotNull(system);
         new JavaTestKit(system) {{
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
@@ -113,14 +112,6 @@ public class LaboratoryDiagnosticEquipmentFunctionalityOrchestratorTest extends 
                             throw noMatch();
                         }
                     }.get();
-
-            InputStream responseStream = EmergencyCommodityStockStatusOrchestratorTest.class.getClassLoader().getResourceAsStream("success_response.json");
-
-            assertNotNull(responseStream);
-
-            String expectedResponse = IOUtils.toString(responseStream);
-
-            assertNotNull(expectedResponse);
 
             assertTrue(Arrays.stream(out).anyMatch(c -> c instanceof FinishRequest));
             assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && 400 == ((FinishRequest) c).getResponseStatus()));

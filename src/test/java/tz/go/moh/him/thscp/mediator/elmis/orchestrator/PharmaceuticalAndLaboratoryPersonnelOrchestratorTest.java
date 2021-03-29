@@ -19,26 +19,27 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Contains tests for the {@link PercentageOfReportsAndRequisitionOrchestrator} class.
+ * Contains tests for the {@link PharmaceuticalAndLaboratoryPersonnelOrchestrator} class.
  */
-public class PercentageOfReportsAndRequisitionOrchestratorTest extends BaseOrchestratorTest {
+public class PharmaceuticalAndLaboratoryPersonnelOrchestratorTest extends BaseOrchestratorTest {
     /**
      * Represents the orchestrator.
      */
-    private final ActorRef orchestrator = system.actorOf(Props.create(PercentageOfReportsAndRequisitionOrchestrator.class, configuration));
+    private final ActorRef orchestrator = system.actorOf(Props.create(PharmaceuticalAndLaboratoryPersonnelOrchestrator.class, configuration));
 
     /**
      * Runs initialization before each test execution.
      */
     @Before
     public void before() {
-        setupDestinationMock("PercentageOfReportsAndRequisitionRequest");
+        setupDestinationMock("WorkforceRequest");
     }
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
-        InputStream stream = PercentageOfReportsAndRequisitionOrchestratorTest.class.getClassLoader().getResourceAsStream("percentage_of_reports_and_requisition_request.json");
+        InputStream stream = PharmaceuticalAndLaboratoryPersonnelOrchestratorTest.class.getClassLoader().getResourceAsStream("workforce_request.json");
         assertNotNull(stream);
+
         new JavaTestKit(system) {{
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
@@ -79,7 +80,6 @@ public class PercentageOfReportsAndRequisitionOrchestratorTest extends BaseOrche
             assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
         }};
     }
-
 
     @Test
     public void testBadRequest() throws Exception {

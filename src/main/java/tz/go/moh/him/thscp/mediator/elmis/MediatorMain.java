@@ -13,12 +13,12 @@ import org.openhim.mediator.engine.StartupActorsConfig;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.ForecastAccuracyPerProgramOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.LaboratoryDiagnosticEquipmentFunctionalityOrchestrator;
-import tz.go.moh.him.thscp.mediator.elmis.orchestrator.PercentageOfReportsAndRequisitionOrchestrator;
+import tz.go.moh.him.thscp.mediator.elmis.orchestrator.PercentageOfReportsAndRequisitionsRejectedOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.ReportingTimelinessOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.StockAvailabilityOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.StockOnHandStatusOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.TurnAroundTimeOrchestrator;
-import tz.go.moh.him.thscp.mediator.elmis.orchestrator.WorkforceOrchestrator;
+import tz.go.moh.him.thscp.mediator.elmis.orchestrator.PharmaceuticalAndLaboratoryPersonnelOrchestrator;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,12 +45,12 @@ public class MediatorMain {
         routingTable.addRoute("/thscp-emergency-commodity-stock-status", EmergencyCommodityStockStatusOrchestrator.class);
         routingTable.addRoute("/thscp-forecast-accuracy-per-program", ForecastAccuracyPerProgramOrchestrator.class);
         routingTable.addRoute("/thscp-laboratory-diagnostic-equipment-functionality", LaboratoryDiagnosticEquipmentFunctionalityOrchestrator.class);
-        routingTable.addRoute("/thscp-percentage-of-reports-and-requisition", PercentageOfReportsAndRequisitionOrchestrator.class);
+        routingTable.addRoute("/thscp-percentage-of-reports-and-requisitions-rejected", PercentageOfReportsAndRequisitionsRejectedOrchestrator.class);
         routingTable.addRoute("/thscp-reporting-timeliness", ReportingTimelinessOrchestrator.class);
         routingTable.addRoute("/thscp-stock-availability", StockAvailabilityOrchestrator.class);
         routingTable.addRoute("/thscp-stock-on-hand", StockOnHandStatusOrchestrator.class);
         routingTable.addRoute("/thscp-turn-around-time-orchestrator", TurnAroundTimeOrchestrator.class);
-        routingTable.addRoute("/thscp-workforce", WorkforceOrchestrator.class);
+        routingTable.addRoute("/thscp-pharmaceutical-and-laboratory-personnel", PharmaceuticalAndLaboratoryPersonnelOrchestrator.class);
 
         return routingTable;
     }

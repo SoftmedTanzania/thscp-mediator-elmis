@@ -19,27 +19,26 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Contains tests for the {@link WorkforceOrchestrator} class.
+ * Contains tests for the {@link PercentageOfReportsAndRequisitionsRejectedOrchestrator} class.
  */
-public class WorkforceOrchestratorTest extends BaseOrchestratorTest {
+public class PercentageOfReportsAndRequisitionsRejectedOrchestratorTest extends BaseOrchestratorTest {
     /**
      * Represents the orchestrator.
      */
-    private final ActorRef orchestrator = system.actorOf(Props.create(WorkforceOrchestrator.class, configuration));
+    private final ActorRef orchestrator = system.actorOf(Props.create(PercentageOfReportsAndRequisitionsRejectedOrchestrator.class, configuration));
 
     /**
      * Runs initialization before each test execution.
      */
     @Before
     public void before() {
-        setupDestinationMock("WorkforceRequest");
+        setupDestinationMock("PercentageOfReportsAndRequisitionRequest");
     }
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
-        InputStream stream = WorkforceOrchestratorTest.class.getClassLoader().getResourceAsStream("workforce_request.json");
+        InputStream stream = PercentageOfReportsAndRequisitionsRejectedOrchestratorTest.class.getClassLoader().getResourceAsStream("percentage_of_reports_and_requisition_request.json");
         assertNotNull(stream);
-
         new JavaTestKit(system) {{
             MediatorHTTPRequest POST_Request = new MediatorHTTPRequest(
                     getRef(),
@@ -80,6 +79,7 @@ public class WorkforceOrchestratorTest extends BaseOrchestratorTest {
             assertTrue(Arrays.stream(out).allMatch(c -> (c instanceof FinishRequest) && JsonParser.parseString(expectedResponse).equals(JsonParser.parseString(((FinishRequest) c).getResponse()))));
         }};
     }
+
 
     @Test
     public void testBadRequest() throws Exception {

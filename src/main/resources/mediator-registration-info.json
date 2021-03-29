@@ -1,11 +1,11 @@
 {
   "urn": "urn:uuid:e128e2f0-7b2d-11eb-8a60-c55dbb67d116",
   "version": "0.1.0",
-  "name": "THSCP-Mediator-eLMIS",
+  "name": "eLMIS - THSCP",
   "description": "A mediator for handling system integration between eLMIS and THSCP",
   "endpoints": [
     {
-      "name": "THSCP-Mediator-eLMIS Route",
+      "name": "eLMIS - THSCP Route",
       "host": "localhost",
       "port": "3017",
       "path": "/thscp",
@@ -14,18 +14,162 @@
   ],
   "defaultChannelConfig": [
     {
-      "name": "eLMIS - THSCP Channel",
-      "urlPattern": "^/thscp$",
+      "name": "eLMIS - THSCP Emergency Stock Status Channel",
+      "urlPattern": "^/thscp-emergency-commodity-stock-status$",
       "type": "http",
       "allow": [
-        "thscp-mediator-elmis-role"
+        "elmis-role"
       ],
       "routes": [
         {
-          "name": "THSCP-Mediator-eLMIS Route",
+          "name": "eLMIS - THSCP Emergency Stock Status Route",
           "host": "localhost",
           "port": "3017",
-          "path": "/thscp",
+          "path": "/thscp-emergency-commodity-stock-status",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Forecast Accuracy Per Program Channel",
+      "urlPattern": "^/thscp-forecast-accuracy-per-program$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Accuracy Per Program Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-forecast-accuracy-per-program",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Laboratory Diagnostic Equipment Functionality Channel",
+      "urlPattern": "^/thscp-laboratory-diagnostic-equipment-functionality$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Laboratory Diagnostic Equipment Functionality Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-laboratory-diagnostic-equipment-functionality",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Percentage of Reports and Requisitions Rejected Channel",
+      "urlPattern": "^/thscp-percentage-of-reports-and-requisitions-rejected$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Percentage of Reports and Requisitions Rejected Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-percentage-of-reports-and-requisitions-rejected",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Reporting Timeliness Channel",
+      "urlPattern": "^/thscp-reporting-timeliness$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Reporting Timeliness Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-reporting-timeliness",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Pharmaceutical and Laboratory personnel Channel",
+      "urlPattern": "^/thscp-pharmaceutical-and-laboratory-personnel$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Pharmaceutical and Laboratory personnel Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-pharmaceutical-and-laboratory-personnel",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Turn Around Time Channel",
+      "urlPattern": "^/thscp-turn-around-time-orchestrator$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Turn Around Time Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-turn-around-time-orchestrator",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Stock Availability Channel",
+      "urlPattern": "^/thscp-stock-availability$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Stock Availability Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-stock-availability",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Stock On Hand Channel",
+      "urlPattern": "^/thscp-stock-on-hand$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Stock On Hand Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-stock-on-hand",
           "type": "http",
           "primary": "true"
         }

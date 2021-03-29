@@ -3,7 +3,7 @@ package tz.go.moh.him.thscp.mediator.elmis.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class PercentageOfReportsAndRequisitionRequest {
+public class PercentageOfReportsAndRequisitionsRejectedRequest {
     /**
      * The unique identifier
      */

@@ -7,12 +7,12 @@ import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import tz.go.moh.him.thscp.mediator.elmis.domain.EmergencyCommodityStockStatusRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.ForecastAccuracyPerProgramRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.LaboratoryDiagnosticEquipmentFunctionalityRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionsRejectedRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.TurnAroundTimeRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.WorkforceRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.PharmaceuticalAndLaboratoryPersonnelRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 
 import java.util.Arrays;
@@ -113,14 +113,14 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("GOOD", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getStatus());
                 break;
             case "PercentageOfReportsAndRequisitionRequest":
-                List<PercentageOfReportsAndRequisitionRequest> percentageOfReportsAndRequisitionRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PercentageOfReportsAndRequisitionRequest[].class));
-                assertEquals("4d4e4fd4-561a-4879-bd7c-2783d9d0edf4", percentageOfReportsAndRequisitionRequests.get(0).getUuid());
-                assertEquals("123456", percentageOfReportsAndRequisitionRequests.get(0).getFacilityId());
-                assertEquals("2020-11-13", percentageOfReportsAndRequisitionRequests.get(0).getPeriod());
-                assertEquals("program name", percentageOfReportsAndRequisitionRequests.get(0).getProgram());
-                assertEquals(10, percentageOfReportsAndRequisitionRequests.get(0).getRejectedForms());
-                assertEquals("2020-11-13", percentageOfReportsAndRequisitionRequests.get(0).getSubmittedAt());
-                assertEquals(15, percentageOfReportsAndRequisitionRequests.get(0).getSubmittedForms());
+                List<PercentageOfReportsAndRequisitionsRejectedRequest> percentageOfReportsAndRequisitionsRejectedRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PercentageOfReportsAndRequisitionsRejectedRequest[].class));
+                assertEquals("4d4e4fd4-561a-4879-bd7c-2783d9d0edf4", percentageOfReportsAndRequisitionsRejectedRequests.get(0).getUuid());
+                assertEquals("123456", percentageOfReportsAndRequisitionsRejectedRequests.get(0).getFacilityId());
+                assertEquals("2020-11-13", percentageOfReportsAndRequisitionsRejectedRequests.get(0).getPeriod());
+                assertEquals("program name", percentageOfReportsAndRequisitionsRejectedRequests.get(0).getProgram());
+                assertEquals(10, percentageOfReportsAndRequisitionsRejectedRequests.get(0).getRejectedForms());
+                assertEquals("2020-11-13", percentageOfReportsAndRequisitionsRejectedRequests.get(0).getSubmittedAt());
+                assertEquals(15, percentageOfReportsAndRequisitionsRejectedRequests.get(0).getSubmittedForms());
                 break;
             case "ReportingTimelinessOrchestratorRequest":
                 List<ReportingTimelinessRequest> reportingTimelinessRequests = Arrays.asList(serializer.deserialize(msg.getBody(), ReportingTimelinessRequest[].class));
@@ -173,14 +173,14 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals(10, turnAroundTimeRequests.get(0).getTargetDays());
                 break;
             case "WorkforceRequest":
-                List<WorkforceRequest> workforceRequests = Arrays.asList(serializer.deserialize(msg.getBody(), WorkforceRequest[].class));
-                assertEquals("53af81dd-d3ae-44ab-86fd-8ed07f0389eb", workforceRequests.get(0).getUuid());
-                assertEquals("112702-6", workforceRequests.get(0).getFacilityId());
-                assertEquals("2020-11-29", workforceRequests.get(0).getPeriod());
-                assertEquals("001", workforceRequests.get(0).getPostId());
-                assertEquals("engineer", workforceRequests.get(0).getPostName());
-                assertEquals(10, workforceRequests.get(0).getTotalPost());
-                assertEquals(3, workforceRequests.get(0).getVacantPost());
+                List<PharmaceuticalAndLaboratoryPersonnelRequest> pharmaceuticalAndLaboratoryPersonnelRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PharmaceuticalAndLaboratoryPersonnelRequest[].class));
+                assertEquals("53af81dd-d3ae-44ab-86fd-8ed07f0389eb", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getUuid());
+                assertEquals("112702-6", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getFacilityId());
+                assertEquals("2020-11-29", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getPeriod());
+                assertEquals("001", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getPostId());
+                assertEquals("engineer", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getPostName());
+                assertEquals(10, pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getTotalPost());
+                assertEquals(3, pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getVacantPost());
                 break;
             default:
                 break;

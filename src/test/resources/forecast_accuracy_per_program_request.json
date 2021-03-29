@@ -1,0 +1,11 @@
+[
+  {
+    "uuid": "8491c5af-24b9-498c-b8a9-5dc711d2d452",
+    "consumedQuantity": 20,
+    "facilityId": "106091-2",
+    "forecastQuantity": 10,
+    "period": "2020-11-25",
+    "productCode": "PR-01",
+    "programCode": "PC-01"
+  }
+]

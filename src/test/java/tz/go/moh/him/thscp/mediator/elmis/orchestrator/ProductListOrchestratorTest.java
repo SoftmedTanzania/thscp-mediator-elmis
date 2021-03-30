@@ -19,25 +19,25 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Contains tests for the {@link PharmaceuticalAndLaboratoryPersonnelOrchestrator} class.
+ * Contains tests for the {@link ProductListOrchestratorTest} class.
  */
-public class PharmaceuticalAndLaboratoryPersonnelOrchestratorTest extends BaseOrchestratorTest {
+public class ProductListOrchestratorTest extends BaseOrchestratorTest {
     /**
      * Represents the orchestrator.
      */
-    private final ActorRef orchestrator = system.actorOf(Props.create(PharmaceuticalAndLaboratoryPersonnelOrchestrator.class, configuration));
+    private final ActorRef orchestrator = system.actorOf(Props.create(ProductListOrchestrator.class, configuration));
 
     /**
      * Runs initialization before each test execution.
      */
     @Before
     public void before() {
-        setupDestinationMock("PharmaceuticalAndLaboratoryRequest");
+        setupDestinationMock("ProductListRequest");
     }
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
-        InputStream stream = PharmaceuticalAndLaboratoryPersonnelOrchestratorTest.class.getClassLoader().getResourceAsStream("pharmaceutical_and_laboratory_request.json");
+        InputStream stream = ProductListOrchestratorTest.class.getClassLoader().getResourceAsStream("products_list.json");
         assertNotNull(stream);
 
         new JavaTestKit(system) {{

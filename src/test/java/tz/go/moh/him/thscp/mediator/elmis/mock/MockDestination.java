@@ -8,11 +8,12 @@ import tz.go.moh.him.thscp.mediator.elmis.domain.EmergencyCommodityStockStatusRe
 import tz.go.moh.him.thscp.mediator.elmis.domain.ForecastAccuracyPerProgramRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.LaboratoryDiagnosticEquipmentFunctionalityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionsRejectedRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.PharmaceuticalAndLaboratoryPersonnelRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.ProductListRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.TurnAroundTimeRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.PharmaceuticalAndLaboratoryPersonnelRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 
 import java.util.Arrays;
@@ -172,7 +173,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("PG-1", turnAroundTimeRequests.get(0).getProgramCode());
                 assertEquals(10, turnAroundTimeRequests.get(0).getTargetDays());
                 break;
-            case "WorkforceRequest":
+            case "PharmaceuticalAndLaboratoryRequest":
                 List<PharmaceuticalAndLaboratoryPersonnelRequest> pharmaceuticalAndLaboratoryPersonnelRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PharmaceuticalAndLaboratoryPersonnelRequest[].class));
                 assertEquals("53af81dd-d3ae-44ab-86fd-8ed07f0389eb", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getUuid());
                 assertEquals("112702-6", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getFacilityId());
@@ -181,6 +182,15 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("engineer", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getPostName());
                 assertEquals(10, pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getTotalPost());
                 assertEquals(3, pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getVacantPost());
+                break;
+            case "ProductListRequest":
+                List<ProductListRequest> productListRequests = Arrays.asList(serializer.deserialize(msg.getBody(), ProductListRequest[].class));
+                assertEquals("6b220f75-5d86-42ac-94ab-77298e5c1115", productListRequests.get(0).getUuid());
+                assertEquals("PHARMACEUTICALS", productListRequests.get(0).getCategory());
+                assertEquals("Ringers Lactate 500Ml", productListRequests.get(0).getDescription());
+                assertEquals("Ringers Lactate 500Ml", productListRequests.get(0).getName());
+                assertEquals("10020035MD", productListRequests.get(0).getProductCode());
+                assertEquals("B/12", productListRequests.get(0).getProductUnit());
                 break;
             default:
                 break;

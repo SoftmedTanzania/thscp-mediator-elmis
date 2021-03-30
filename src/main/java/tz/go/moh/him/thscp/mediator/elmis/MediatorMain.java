@@ -14,11 +14,12 @@ import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockSt
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.ForecastAccuracyPerProgramOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.LaboratoryDiagnosticEquipmentFunctionalityOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.PercentageOfReportsAndRequisitionsRejectedOrchestrator;
+import tz.go.moh.him.thscp.mediator.elmis.orchestrator.PharmaceuticalAndLaboratoryPersonnelOrchestrator;
+import tz.go.moh.him.thscp.mediator.elmis.orchestrator.ProductListOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.ReportingTimelinessOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.StockAvailabilityOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.StockOnHandStatusOrchestrator;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.TurnAroundTimeOrchestrator;
-import tz.go.moh.him.thscp.mediator.elmis.orchestrator.PharmaceuticalAndLaboratoryPersonnelOrchestrator;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class MediatorMain {
         routingTable.addRoute("/thscp-stock-on-hand", StockOnHandStatusOrchestrator.class);
         routingTable.addRoute("/thscp-turn-around-time-orchestrator", TurnAroundTimeOrchestrator.class);
         routingTable.addRoute("/thscp-pharmaceutical-and-laboratory-personnel", PharmaceuticalAndLaboratoryPersonnelOrchestrator.class);
+        routingTable.addRoute("/thscp-product-list", ProductListOrchestrator.class);
 
         return routingTable;
     }

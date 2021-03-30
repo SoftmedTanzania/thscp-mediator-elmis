@@ -32,12 +32,12 @@ public class PharmaceuticalAndLaboratoryPersonnelOrchestratorTest extends BaseOr
      */
     @Before
     public void before() {
-        setupDestinationMock("WorkforceRequest");
+        setupDestinationMock("PharmaceuticalAndLaboratoryRequest");
     }
 
     @Test
     public void testMediatorHTTPRequest() throws Exception {
-        InputStream stream = PharmaceuticalAndLaboratoryPersonnelOrchestratorTest.class.getClassLoader().getResourceAsStream("workforce_request.json");
+        InputStream stream = PharmaceuticalAndLaboratoryPersonnelOrchestratorTest.class.getClassLoader().getResourceAsStream("pharmaceutical_and_laboratory_request.json");
         assertNotNull(stream);
 
         new JavaTestKit(system) {{

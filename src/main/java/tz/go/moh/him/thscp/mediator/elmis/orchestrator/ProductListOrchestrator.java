@@ -5,6 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.ProductListRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class ProductListOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<ProductListRequest> productListRequests = Arrays.asList(serializer.deserialize(request.getBody(), ProductListRequest[].class));
 
-        sendDataToThscp(productListRequests, validateMessage(productListRequests), "ProductListRequest");
+        sendDataToThscp(productListRequests, validateMessage(productListRequests), Constants.PRODUCT_LIST_REQUEST);
     }
 
     /**

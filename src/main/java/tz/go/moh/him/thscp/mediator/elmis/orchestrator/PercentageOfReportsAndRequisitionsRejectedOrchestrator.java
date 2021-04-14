@@ -5,6 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionsRejectedRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class PercentageOfReportsAndRequisitionsRejectedOrchestrator extends Base
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<PercentageOfReportsAndRequisitionsRejectedRequest> percentageOfReportsAndRequisitionsRejectedRequests = Arrays.asList(serializer.deserialize(request.getBody(), PercentageOfReportsAndRequisitionsRejectedRequest[].class));
 
-        sendDataToThscp(percentageOfReportsAndRequisitionsRejectedRequests, validateMessage(percentageOfReportsAndRequisitionsRejectedRequests), "PercentageOfReportsAndRequisitionRequest");
+        sendDataToThscp(percentageOfReportsAndRequisitionsRejectedRequests, validateMessage(percentageOfReportsAndRequisitionsRejectedRequests), Constants.PERCENTAGE_OF_REPORTS_AND_REQUISITION_REQUEST);
     }
 
     /**

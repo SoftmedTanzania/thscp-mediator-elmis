@@ -5,6 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.PharmaceuticalAndLaboratoryPersonnelRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class PharmaceuticalAndLaboratoryPersonnelOrchestrator extends BaseOrches
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<PharmaceuticalAndLaboratoryPersonnelRequest> pharmaceuticalAndLaboratoryPersonnelRequests = Arrays.asList(serializer.deserialize(request.getBody(), PharmaceuticalAndLaboratoryPersonnelRequest[].class));
 
-        sendDataToThscp(pharmaceuticalAndLaboratoryPersonnelRequests, validateMessage(pharmaceuticalAndLaboratoryPersonnelRequests), "PharmaceuticalAndLaboratoryRequest");
+        sendDataToThscp(pharmaceuticalAndLaboratoryPersonnelRequests, validateMessage(pharmaceuticalAndLaboratoryPersonnelRequests), Constants.PHARMACEUTICAL_AND_LABORATORY_REQUEST);
     }
 
     /**

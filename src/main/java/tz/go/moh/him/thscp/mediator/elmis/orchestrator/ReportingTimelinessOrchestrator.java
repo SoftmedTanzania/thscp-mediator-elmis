@@ -5,6 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class ReportingTimelinessOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<ReportingTimelinessRequest> reportingTimelinessRequests = Arrays.asList(serializer.deserialize(request.getBody(), ReportingTimelinessRequest[].class));
 
-        sendDataToThscp(reportingTimelinessRequests, validateMessage(reportingTimelinessRequests), "ReportingTimelinessRequest");
+        sendDataToThscp(reportingTimelinessRequests, validateMessage(reportingTimelinessRequests), Constants.REPORTING_TIMELINESS_REQUEST);
     }
 
     /**

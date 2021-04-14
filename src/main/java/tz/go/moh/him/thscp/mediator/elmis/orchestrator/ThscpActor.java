@@ -5,7 +5,9 @@ import akka.actor.ActorSelection;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.http.HttpHeaders;
 import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
@@ -13,6 +15,7 @@ import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import org.openhim.mediator.engine.messages.SimpleMediatorRequest;
 import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,8 +63,11 @@ public class ThscpActor extends UntypedActor {
         String scheme;
         String host;
         String path;
+        String username;
+        String password;
         int portNumber;
         if (config.getDynamicConfig().isEmpty()) {
+            log.debug("Dynamic config is empty, using config from mediator.properties");
             if (config.getProperty("destination.scheme").equals("https")) {
                 scheme = "https";
             } else {
@@ -107,12 +113,27 @@ public class ThscpActor extends UntypedActor {
             }
 
         } else {
+            log.debug("Using dynamic config");
+
             JSONObject connectionProperties = new JSONObject(config.getDynamicConfig()).getJSONObject("destinationConnectionProperties");
 
             host = connectionProperties.getString("destinationHost");
             portNumber = connectionProperties.getInt("destinationPort");
             scheme = connectionProperties.getString("destinationScheme");
 
+            if (connectionProperties.has("destinationUsername") && connectionProperties.has("destinationPassword")) {
+                username = connectionProperties.getString("destinationUsername");
+                password = connectionProperties.getString("destinationPassword");
+
+                // if we have a username and a password
+                // we want to add the username and password as the Basic Auth header in the HTTP request
+                if (username != null && !"".equals(username) && password != null && !"".equals(password)) {
+                    String auth = username + ":" + password;
+                    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
+                    String authHeader = "Basic " + new String(encodedAuth);
+                    headers.put(HttpHeaders.AUTHORIZATION, authHeader);
+                }
+            }
 
             switch (messageType) {
                 case Constants.EMERGENCY_COMMODITY_STOCK_STATUS_REQUEST:

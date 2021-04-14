@@ -5,6 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.ForecastAccuracyPerProgramRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class ForecastAccuracyPerProgramOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<ForecastAccuracyPerProgramRequest> forecastAccuracyPerProgramRequests = Arrays.asList(serializer.deserialize(request.getBody(), ForecastAccuracyPerProgramRequest[].class));
 
-        sendDataToThscp(forecastAccuracyPerProgramRequests, validateMessage(forecastAccuracyPerProgramRequests));
+        sendDataToThscp(forecastAccuracyPerProgramRequests, validateMessage(forecastAccuracyPerProgramRequests), Constants.FORECAST_ACCURACY_PER_PROGRAM_REQUEST);
     }
 
     /**

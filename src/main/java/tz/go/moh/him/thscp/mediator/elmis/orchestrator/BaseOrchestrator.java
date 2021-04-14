@@ -127,7 +127,7 @@ public abstract class BaseOrchestrator extends UntypedActor {
      * @param objectsList   list of objects to be sent to THSCP
      * @param resultDetails Result details of the data validation
      */
-    protected void sendDataToThscp(List<?> objectsList, List<ResultDetail> resultDetails) {
+    protected void sendDataToThscp(List<?> objectsList, List<ResultDetail> resultDetails, String payloadType) {
         // if there are any errors
         // we need to serialize the results and return
         if (resultDetails.stream().anyMatch(c -> c.getType() == ResultDetail.ResultsDetailsType.ERROR)) {
@@ -136,7 +136,8 @@ public abstract class BaseOrchestrator extends UntypedActor {
 
         } else {
             log.info("Sending data to Thscp Actor");
-            ActorRef actor = getContext().actorOf(Props.create(ThscpActor.class, config));
+
+            ActorRef actor = getContext().actorOf(Props.create(ThscpActor.class, config, payloadType));
             actor.tell(
                     new SimpleMediatorRequest<>(
                             originalRequest.getRequestHandler(),

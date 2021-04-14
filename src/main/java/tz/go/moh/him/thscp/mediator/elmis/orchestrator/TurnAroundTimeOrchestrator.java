@@ -5,6 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.TurnAroundTimeRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class TurnAroundTimeOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<TurnAroundTimeRequest> turnAroundTimeRequests = Arrays.asList(serializer.deserialize(request.getBody(), TurnAroundTimeRequest[].class));
 
-        sendDataToThscp(turnAroundTimeRequests, validateMessage(turnAroundTimeRequests));
+        sendDataToThscp(turnAroundTimeRequests, validateMessage(turnAroundTimeRequests), Constants.TURN_AROUND_TIME_REQUEST);
     }
 
     /**

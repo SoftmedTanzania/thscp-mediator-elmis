@@ -15,6 +15,7 @@ import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
 import tz.go.moh.him.thscp.mediator.elmis.domain.TurnAroundTimeRequest;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -83,7 +84,7 @@ public class MockDestination extends MockHTTPConnector {
     @Override
     public void executeOnReceive(MediatorHTTPRequest msg) {
         switch (expectedMessageType) {
-            case "EmergencyCommodityStockStatusRequest":
+            case Constants.EMERGENCY_COMMODITY_STOCK_STATUS_REQUEST:
                 List<EmergencyCommodityStockStatusRequest> emergencyCommodityStockStatusRequestList = Arrays.asList(serializer.deserialize(msg.getBody(), EmergencyCommodityStockStatusRequest[].class));
                 assertEquals("9bd21ec8-6388-464f-96d7-265fef0fa46a", emergencyCommodityStockStatusRequestList.get(0).getUuid());
                 assertEquals(500, emergencyCommodityStockStatusRequestList.get(0).getAvailableQuantity());
@@ -94,7 +95,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals(40, emergencyCommodityStockStatusRequestList.get(0).getStockOfMonth());
                 assertEquals(50, emergencyCommodityStockStatusRequestList.get(0).getStockQuantity());
                 break;
-            case "ForecastAccuracyPerProgramRequest":
+            case Constants.FORECAST_ACCURACY_PER_PROGRAM_REQUEST:
                 List<ForecastAccuracyPerProgramRequest> forecastAccuracyPerProgramRequests = Arrays.asList(serializer.deserialize(msg.getBody(), ForecastAccuracyPerProgramRequest[].class));
                 assertEquals("8491c5af-24b9-498c-b8a9-5dc711d2d452", forecastAccuracyPerProgramRequests.get(0).getUuid());
                 assertEquals(20, forecastAccuracyPerProgramRequests.get(0).getConsumedQuantity());
@@ -104,7 +105,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("PR-01", forecastAccuracyPerProgramRequests.get(0).getProductCode());
                 assertEquals("PC-01", forecastAccuracyPerProgramRequests.get(0).getProgramCode());
                 break;
-            case "LaboratoryDiagnosticEquipmentFunctionalityRequest":
+            case Constants.LABORATORY_DIAGNOSTIC_EQUIPMENT_FUNCTIONALITY_REQUEST:
                 List<LaboratoryDiagnosticEquipmentFunctionalityRequest> laboratoryDiagnosticEquipmentFunctionalityRequests = Arrays.asList(serializer.deserialize(msg.getBody(), LaboratoryDiagnosticEquipmentFunctionalityRequest[].class));
                 assertEquals("ca0ed2a6-3e6e-419e-809a-5ddecf58f63d", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getUuid());
                 assertEquals("flask", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getEquipmentName());
@@ -113,7 +114,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals(100, laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getQuantity());
                 assertEquals("GOOD", laboratoryDiagnosticEquipmentFunctionalityRequests.get(0).getStatus());
                 break;
-            case "PercentageOfReportsAndRequisitionRequest":
+            case Constants.PERCENTAGE_OF_REPORTS_AND_REQUISITION_REQUEST:
                 List<PercentageOfReportsAndRequisitionsRejectedRequest> percentageOfReportsAndRequisitionsRejectedRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PercentageOfReportsAndRequisitionsRejectedRequest[].class));
                 assertEquals("4d4e4fd4-561a-4879-bd7c-2783d9d0edf4", percentageOfReportsAndRequisitionsRejectedRequests.get(0).getUuid());
                 assertEquals("123456", percentageOfReportsAndRequisitionsRejectedRequests.get(0).getFacilityId());
@@ -123,7 +124,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("2020-11-13", percentageOfReportsAndRequisitionsRejectedRequests.get(0).getSubmittedAt());
                 assertEquals(15, percentageOfReportsAndRequisitionsRejectedRequests.get(0).getSubmittedForms());
                 break;
-            case "ReportingTimelinessOrchestratorRequest":
+            case Constants.REPORTING_TIMELINESS_REQUEST:
                 List<ReportingTimelinessRequest> reportingTimelinessRequests = Arrays.asList(serializer.deserialize(msg.getBody(), ReportingTimelinessRequest[].class));
                 assertEquals("61ee3f67-992c-432b-8536-2b89aa3165a8", reportingTimelinessRequests.get(0).getUuid());
                 assertEquals("Kigoma", reportingTimelinessRequests.get(0).getDistrict());
@@ -131,7 +132,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("2020-11-13", reportingTimelinessRequests.get(0).getPeriod());
                 assertEquals("COVID", reportingTimelinessRequests.get(0).getProgram());
                 break;
-            case "StockAvailabilityOrchestratorRequest":
+            case Constants.STOCK_AVAILABILITY_REQUEST:
                 List<StockAvailabilityRequest> stockAvailabilityRequests = Arrays.asList(serializer.deserialize(msg.getBody(), StockAvailabilityRequest[].class));
                 assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockAvailabilityRequests.get(0).getUuid());
                 assertEquals("106091-2", stockAvailabilityRequests.get(0).getFacilityId());
@@ -140,7 +141,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("PR-01", stockAvailabilityRequests.get(0).getProductCode());
                 assertEquals("PC-02", stockAvailabilityRequests.get(0).getProgramCode());
                 break;
-            case "StockOnHandStatusRequest":
+            case Constants.STOCK_ON_HAND_STATUS_REQUEST:
                 List<StockOnHandStatusRequest> stockOnHandStatusRequests = Arrays.asList(serializer.deserialize(msg.getBody(), StockOnHandStatusRequest[].class));
                 assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockOnHandStatusRequests.get(0).getUuid());
                 assertEquals(0, stockOnHandStatusRequests.get(0).getDamagedPercentage(), 0.001);
@@ -156,7 +157,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals(100, stockOnHandStatusRequests.get(0).getQuantity());
                 assertEquals("001", stockOnHandStatusRequests.get(0).getStockId());
                 break;
-            case "TurnAroundTimeRequest":
+            case Constants.TURN_AROUND_TIME_REQUEST:
                 List<TurnAroundTimeRequest> turnAroundTimeRequests = Arrays.asList(serializer.deserialize(msg.getBody(), TurnAroundTimeRequest[].class));
                 assertEquals("7da14260-b2c3-4ac6-895b-0fd901d54679", turnAroundTimeRequests.get(0).getUuid());
                 assertEquals(10, turnAroundTimeRequests.get(0).getDeliveredQuantity());
@@ -173,7 +174,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("PG-1", turnAroundTimeRequests.get(0).getProgramCode());
                 assertEquals(10, turnAroundTimeRequests.get(0).getTargetDays());
                 break;
-            case "PharmaceuticalAndLaboratoryRequest":
+            case Constants.PHARMACEUTICAL_AND_LABORATORY_REQUEST:
                 List<PharmaceuticalAndLaboratoryPersonnelRequest> pharmaceuticalAndLaboratoryPersonnelRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PharmaceuticalAndLaboratoryPersonnelRequest[].class));
                 assertEquals("53af81dd-d3ae-44ab-86fd-8ed07f0389eb", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getUuid());
                 assertEquals("112702-6", pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getFacilityId());
@@ -183,7 +184,7 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals(10, pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getTotalPost());
                 assertEquals(3, pharmaceuticalAndLaboratoryPersonnelRequests.get(0).getVacantPost());
                 break;
-            case "ProductListRequest":
+            case Constants.PRODUCT_LIST_REQUEST:
                 List<ProductListRequest> productListRequests = Arrays.asList(serializer.deserialize(msg.getBody(), ProductListRequest[].class));
                 assertEquals("6b220f75-5d86-42ac-94ab-77298e5c1115", productListRequests.get(0).getUuid());
                 assertEquals("PHARMACEUTICALS", productListRequests.get(0).getCategory());

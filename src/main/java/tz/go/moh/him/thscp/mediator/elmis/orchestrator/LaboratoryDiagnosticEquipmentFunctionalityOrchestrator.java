@@ -5,6 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.LaboratoryDiagnosticEquipmentFunctionalityRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class LaboratoryDiagnosticEquipmentFunctionalityOrchestrator extends Base
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<LaboratoryDiagnosticEquipmentFunctionalityRequest> laboratoryDiagnosticEquipmentFunctionalityRequests = Arrays.asList(serializer.deserialize(request.getBody(), LaboratoryDiagnosticEquipmentFunctionalityRequest[].class));
 
-        sendDataToThscp(laboratoryDiagnosticEquipmentFunctionalityRequests, validateMessage(laboratoryDiagnosticEquipmentFunctionalityRequests));
+        sendDataToThscp(laboratoryDiagnosticEquipmentFunctionalityRequests, validateMessage(laboratoryDiagnosticEquipmentFunctionalityRequests), Constants.LABORATORY_DIAGNOSTIC_EQUIPMENT_FUNCTIONALITY_REQUEST);
     }
 
     /**

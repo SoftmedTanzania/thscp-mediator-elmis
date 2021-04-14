@@ -5,6 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class StockOnHandStatusOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<StockOnHandStatusRequest> stockOnHandStatusRequests = Arrays.asList(serializer.deserialize(request.getBody(), StockOnHandStatusRequest[].class));
 
-        sendDataToThscp(stockOnHandStatusRequests, validateMessage(stockOnHandStatusRequests));
+        sendDataToThscp(stockOnHandStatusRequests, validateMessage(stockOnHandStatusRequests), Constants.STOCK_ON_HAND_STATUS_REQUEST);
     }
 
     /**

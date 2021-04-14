@@ -24,7 +24,7 @@ public class LaboratoryDiagnosticEquipmentFunctionalityOrchestrator extends Base
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<LaboratoryDiagnosticEquipmentFunctionalityRequest> laboratoryDiagnosticEquipmentFunctionalityRequests = Arrays.asList(serializer.deserialize(request.getBody(), LaboratoryDiagnosticEquipmentFunctionalityRequest[].class));
 
-        sendDataToThscp(laboratoryDiagnosticEquipmentFunctionalityRequests, validateMessage(laboratoryDiagnosticEquipmentFunctionalityRequests));
+        sendDataToThscp(laboratoryDiagnosticEquipmentFunctionalityRequests, validateMessage(laboratoryDiagnosticEquipmentFunctionalityRequests), "LaboratoryDiagnosticEquipmentFunctionalityRequest");
     }
 
     /**

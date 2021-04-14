@@ -24,7 +24,7 @@ public class StockAvailabilityOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<StockAvailabilityRequest> stockAvailabilityRequests = Arrays.asList(serializer.deserialize(request.getBody(), StockAvailabilityRequest[].class));
 
-        sendDataToThscp(stockAvailabilityRequests, validateMessage(stockAvailabilityRequests));
+        sendDataToThscp(stockAvailabilityRequests, validateMessage(stockAvailabilityRequests), "StockAvailabilityRequest");
     }
 
     /**

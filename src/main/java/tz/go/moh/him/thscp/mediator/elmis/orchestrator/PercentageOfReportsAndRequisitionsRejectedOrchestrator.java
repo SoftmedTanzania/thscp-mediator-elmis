@@ -24,7 +24,7 @@ public class PercentageOfReportsAndRequisitionsRejectedOrchestrator extends Base
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<PercentageOfReportsAndRequisitionsRejectedRequest> percentageOfReportsAndRequisitionsRejectedRequests = Arrays.asList(serializer.deserialize(request.getBody(), PercentageOfReportsAndRequisitionsRejectedRequest[].class));
 
-        sendDataToThscp(percentageOfReportsAndRequisitionsRejectedRequests, validateMessage(percentageOfReportsAndRequisitionsRejectedRequests));
+        sendDataToThscp(percentageOfReportsAndRequisitionsRejectedRequests, validateMessage(percentageOfReportsAndRequisitionsRejectedRequests), "PercentageOfReportsAndRequisitionRequest");
     }
 
     /**

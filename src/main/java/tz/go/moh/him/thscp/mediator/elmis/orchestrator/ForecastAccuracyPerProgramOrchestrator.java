@@ -24,7 +24,7 @@ public class ForecastAccuracyPerProgramOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<ForecastAccuracyPerProgramRequest> forecastAccuracyPerProgramRequests = Arrays.asList(serializer.deserialize(request.getBody(), ForecastAccuracyPerProgramRequest[].class));
 
-        sendDataToThscp(forecastAccuracyPerProgramRequests, validateMessage(forecastAccuracyPerProgramRequests));
+        sendDataToThscp(forecastAccuracyPerProgramRequests, validateMessage(forecastAccuracyPerProgramRequests), "ForecastAccuracyPerProgramRequest");
     }
 
     /**

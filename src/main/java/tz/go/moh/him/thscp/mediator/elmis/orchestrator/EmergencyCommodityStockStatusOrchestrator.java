@@ -24,7 +24,7 @@ public class EmergencyCommodityStockStatusOrchestrator extends BaseOrchestrator 
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<EmergencyCommodityStockStatusRequest> stockOnHandStatusRequests = Arrays.asList(serializer.deserialize(request.getBody(), EmergencyCommodityStockStatusRequest[].class));
 
-        sendDataToThscp(stockOnHandStatusRequests, validateMessage(stockOnHandStatusRequests));
+        sendDataToThscp(stockOnHandStatusRequests, validateMessage(stockOnHandStatusRequests), "EmergencyCommodityStockStatusRequest");
     }
 
     /**

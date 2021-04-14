@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class PharmaceuticalAndLaboratoryPersonnelOrchestratorTest extends BaseOr
      */
     @Before
     public void before() {
-        setupDestinationMock("PharmaceuticalAndLaboratoryRequest");
+        setupDestinationMock(Constants.PHARMACEUTICAL_AND_LABORATORY_REQUEST);
     }
 
     @Test

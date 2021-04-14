@@ -24,7 +24,7 @@ public class StockOnHandStatusOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<StockOnHandStatusRequest> stockOnHandStatusRequests = Arrays.asList(serializer.deserialize(request.getBody(), StockOnHandStatusRequest[].class));
 
-        sendDataToThscp(stockOnHandStatusRequests, validateMessage(stockOnHandStatusRequests));
+        sendDataToThscp(stockOnHandStatusRequests, validateMessage(stockOnHandStatusRequests), "StockOnHandStatusRequest");
     }
 
     /**

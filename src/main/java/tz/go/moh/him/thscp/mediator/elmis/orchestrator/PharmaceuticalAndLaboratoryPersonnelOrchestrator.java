@@ -24,7 +24,7 @@ public class PharmaceuticalAndLaboratoryPersonnelOrchestrator extends BaseOrches
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<PharmaceuticalAndLaboratoryPersonnelRequest> pharmaceuticalAndLaboratoryPersonnelRequests = Arrays.asList(serializer.deserialize(request.getBody(), PharmaceuticalAndLaboratoryPersonnelRequest[].class));
 
-        sendDataToThscp(pharmaceuticalAndLaboratoryPersonnelRequests, validateMessage(pharmaceuticalAndLaboratoryPersonnelRequests));
+        sendDataToThscp(pharmaceuticalAndLaboratoryPersonnelRequests, validateMessage(pharmaceuticalAndLaboratoryPersonnelRequests), "PharmaceuticalAndLaboratoryRequest");
     }
 
     /**

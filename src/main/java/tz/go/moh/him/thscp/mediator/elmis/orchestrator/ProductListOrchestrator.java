@@ -24,7 +24,7 @@ public class ProductListOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<ProductListRequest> productListRequests = Arrays.asList(serializer.deserialize(request.getBody(), ProductListRequest[].class));
 
-        sendDataToThscp(productListRequests, validateMessage(productListRequests));
+        sendDataToThscp(productListRequests, validateMessage(productListRequests), "ProductListRequest");
     }
 
     /**

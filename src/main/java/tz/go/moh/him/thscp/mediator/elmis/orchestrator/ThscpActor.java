@@ -11,6 +11,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import org.openhim.mediator.engine.messages.SimpleMediatorRequest;
+import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +23,14 @@ public class ThscpActor extends UntypedActor {
      * The mediator configuration.
      */
     private final MediatorConfig config;
-
     /**
      * The logger instance.
      */
     private final LoggingAdapter log = Logging.getLogger(getContext().system(), this);
-
+    /**
+     * The message type.
+     */
+    private final String messageType;
     /**
      * The request handler that handles requests and responses.
      */
@@ -39,8 +42,9 @@ public class ThscpActor extends UntypedActor {
      *
      * @param config The mediator configuration.
      */
-    public ThscpActor(MediatorConfig config) {
+    public ThscpActor(MediatorConfig config, String messageType) {
         this.config = config;
+        this.messageType = messageType;
     }
 
     /**
@@ -49,6 +53,7 @@ public class ThscpActor extends UntypedActor {
      * @param message to be sent to the Thscp
      */
     private void forwardToThscp(String message) {
+
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
@@ -65,14 +70,85 @@ public class ThscpActor extends UntypedActor {
 
             host = config.getProperty("destination.host");
             portNumber = Integer.parseInt(config.getProperty("destination.api.port"));
-            path = config.getProperty("destination.api.path");
+            switch (messageType) {
+                case Constants.EMERGENCY_COMMODITY_STOCK_STATUS_REQUEST:
+                    path = config.getProperty("destination.api.path.emergency_stock_status");
+                    break;
+                case Constants.FORECAST_ACCURACY_PER_PROGRAM_REQUEST:
+                    path = config.getProperty("destination.api.path.forecast_accuracy_per_program");
+                    break;
+                case Constants.LABORATORY_DIAGNOSTIC_EQUIPMENT_FUNCTIONALITY_REQUEST:
+                    path = config.getProperty("destination.api.path.laboratory_diagnostic_equipment_functionality");
+                    break;
+                case Constants.PERCENTAGE_OF_REPORTS_AND_REQUISITION_REQUEST:
+                    path = config.getProperty("destination.api.path.percentage_of_reports_and_requisition");
+                    break;
+                case Constants.REPORTING_TIMELINESS_REQUEST:
+                    path = config.getProperty("destination.api.path.reporting_timeliness");
+                    break;
+                case Constants.STOCK_AVAILABILITY_REQUEST:
+                    path = config.getProperty("destination.api.path.stock_availability");
+                    break;
+                case Constants.STOCK_ON_HAND_STATUS_REQUEST:
+                    path = config.getProperty("destination.api.path.stock_on_hand");
+                    break;
+                case Constants.TURN_AROUND_TIME_REQUEST:
+                    path = config.getProperty("destination.api.path.turn_around_time");
+                    break;
+                case Constants.PHARMACEUTICAL_AND_LABORATORY_REQUEST:
+                    path = config.getProperty("destination.api.path.pharmaceutical_and_laboratory");
+                    break;
+                case Constants.PRODUCT_LIST_REQUEST:
+                    path = config.getProperty("destination.api.path.product_list");
+                    break;
+                default:
+                    path = null;
+                    break;
+            }
+
         } else {
             JSONObject connectionProperties = new JSONObject(config.getDynamicConfig()).getJSONObject("destinationConnectionProperties");
 
             host = connectionProperties.getString("destinationHost");
             portNumber = connectionProperties.getInt("destinationPort");
-            path = connectionProperties.getString("destinationPath");
             scheme = connectionProperties.getString("destinationScheme");
+
+
+            switch (messageType) {
+                case Constants.EMERGENCY_COMMODITY_STOCK_STATUS_REQUEST:
+                    path = connectionProperties.getString("destinationPathEmergencyStockStatus");
+                    break;
+                case Constants.FORECAST_ACCURACY_PER_PROGRAM_REQUEST:
+                    path = connectionProperties.getString("destinationPathAccuracyPerProgram");
+                    break;
+                case Constants.LABORATORY_DIAGNOSTIC_EQUIPMENT_FUNCTIONALITY_REQUEST:
+                    path = connectionProperties.getString("destinationPathLaboratoryDiagnosticEquipmentFunctionality");
+                    break;
+                case Constants.PERCENTAGE_OF_REPORTS_AND_REQUISITION_REQUEST:
+                    path = connectionProperties.getString("destinationPathPercentageOfReportsAndRequisitionsRejected");
+                    break;
+                case Constants.REPORTING_TIMELINESS_REQUEST:
+                    path = connectionProperties.getString("destinationPathReportingTimeliness");
+                    break;
+                case Constants.STOCK_AVAILABILITY_REQUEST:
+                    path = connectionProperties.getString("destinationPathStockAvailability");
+                    break;
+                case Constants.STOCK_ON_HAND_STATUS_REQUEST:
+                    path = connectionProperties.getString("destinationPathStockOnHand");
+                    break;
+                case Constants.TURN_AROUND_TIME_REQUEST:
+                    path = connectionProperties.getString("destinationPathTurnAroundTime");
+                    break;
+                case Constants.PHARMACEUTICAL_AND_LABORATORY_REQUEST:
+                    path = connectionProperties.getString("destinationPathPharmaceuticalAndLaboratoryPersonnel");
+                    break;
+                case Constants.PRODUCT_LIST_REQUEST:
+                    path = connectionProperties.getString("destinationPathProductList");
+                    break;
+                default:
+                    path = null;
+                    break;
+            }
         }
 
         List<Pair<String, String>> params = new ArrayList<>();

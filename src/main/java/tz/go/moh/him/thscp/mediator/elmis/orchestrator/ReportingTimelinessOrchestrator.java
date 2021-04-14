@@ -24,7 +24,7 @@ public class ReportingTimelinessOrchestrator extends BaseOrchestrator {
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
         List<ReportingTimelinessRequest> reportingTimelinessRequests = Arrays.asList(serializer.deserialize(request.getBody(), ReportingTimelinessRequest[].class));
 
-        sendDataToThscp(reportingTimelinessRequests, validateMessage(reportingTimelinessRequests));
+        sendDataToThscp(reportingTimelinessRequests, validateMessage(reportingTimelinessRequests), "ReportingTimelinessRequest");
     }
 
     /**

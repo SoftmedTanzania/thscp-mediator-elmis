@@ -277,9 +277,63 @@
           "type": "number"
         },
         {
-          "param": "destinationPath",
-          "displayName": "Destination Path",
-          "description": "The destination path for receiving data from the HIM. eg /hdr",
+          "param": "destinationPathEmergencyStockStatus",
+          "displayName": "Destination Path for Emergency Stock Status",
+          "description": "The destination path for receiving Emergency Stock Status",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathAccuracyPerProgram",
+          "displayName": "Destination Path for Accuracy Per Program",
+          "description": "The destination path for receiving Accuracy Per Program",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathLaboratoryDiagnosticEquipmentFunctionality",
+          "displayName": "Destination Path for Laboratory Diagnostic Equipment Functionality",
+          "description": "The destination path for receiving Laboratory Diagnostic Equipment Functionality",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathPercentageOfReportsAndRequisitionsRejected",
+          "displayName": "Destination Path for Percentage of Reports and Requisitions Rejected",
+          "description": "The destination path for receiving Percentage of Reports and Requisitions Rejected",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathReportingTimeliness",
+          "displayName": "Destination Path for Reporting Timeliness",
+          "description": "The destination path for receiving Reporting Timeliness",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathPharmaceuticalAndLaboratoryPersonnel",
+          "displayName": "Destination Path for Pharmaceutical and Laboratory personnel",
+          "description": "The destination path for receiving Pharmaceutical and Laboratory personnel",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathTurnAroundTime",
+          "displayName": "Destination Path for Turn Around Time",
+          "description": "The destination path for receiving Turn Around Time",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathStockAvailability",
+          "displayName": "Destination Path for Stock Availability",
+          "description": "The destination path for receiving Stock Availability",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathStockOnHand",
+          "displayName": "Destination Path for Stock On Hand",
+          "description": "The destination path for receiving Stock On Hand",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathProductList",
+          "displayName": "Destination Path for Product List",
+          "description": "The destination path for receiving Product List",
           "type": "string"
         },
         {

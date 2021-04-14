@@ -171,7 +171,6 @@ public class ThscpActor extends UntypedActor {
                     break;
             }
         }
-
         List<Pair<String, String>> params = new ArrayList<>();
 
         host = scheme + "://" + host + ":" + portNumber + path;

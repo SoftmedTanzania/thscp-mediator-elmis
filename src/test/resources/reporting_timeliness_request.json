@@ -1,8 +1,12 @@
 [
   {
     "uuid": "61ee3f67-992c-432b-8536-2b89aa3165a8",
-    "district": "Kigoma",
-    "expected": 5,
+    "districtCode": "TZ.LK.KR.KY",
+    "expected": 15,
+    "reported": 3,
+    "nonReported": 5,
+    "unscheduled": 5,
+    "reportedLate": 2,
     "period": "2020-11-13",
     "program": "COVID"
   }

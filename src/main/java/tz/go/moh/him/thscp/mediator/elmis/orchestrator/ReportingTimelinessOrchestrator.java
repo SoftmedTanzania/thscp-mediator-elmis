@@ -42,8 +42,8 @@ public class ReportingTimelinessOrchestrator extends BaseOrchestrator {
                 results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "uuid"), null));
             }
 
-            if (StringUtils.isEmpty(request.getDistrict())) {
-                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "district"), null));
+            if (StringUtils.isEmpty(request.getDistrictCode())) {
+                results.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("NN_ERR01"), "districtCode"), null));
             }
 
             if (StringUtils.isEmpty(request.getPeriod())) {

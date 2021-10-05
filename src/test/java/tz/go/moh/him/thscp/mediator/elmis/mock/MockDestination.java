@@ -127,8 +127,12 @@ public class MockDestination extends MockHTTPConnector {
             case Constants.REPORTING_TIMELINESS_REQUEST:
                 List<ReportingTimelinessRequest> reportingTimelinessRequests = Arrays.asList(serializer.deserialize(msg.getBody(), ReportingTimelinessRequest[].class));
                 assertEquals("61ee3f67-992c-432b-8536-2b89aa3165a8", reportingTimelinessRequests.get(0).getUuid());
-                assertEquals("Kigoma", reportingTimelinessRequests.get(0).getDistrict());
-                assertEquals(5, reportingTimelinessRequests.get(0).getExpected());
+                assertEquals("TZ.LK.KR.KY", reportingTimelinessRequests.get(0).getDistrictCode());
+                assertEquals(15, reportingTimelinessRequests.get(0).getExpected());
+                assertEquals(3, reportingTimelinessRequests.get(0).getReported());
+                assertEquals(5, reportingTimelinessRequests.get(0).getNonReported());
+                assertEquals(5, reportingTimelinessRequests.get(0).getUnscheduled());
+                assertEquals(2, reportingTimelinessRequests.get(0).getReportedLate());
                 assertEquals("2020-11-13", reportingTimelinessRequests.get(0).getPeriod());
                 assertEquals("COVID", reportingTimelinessRequests.get(0).getProgram());
                 break;

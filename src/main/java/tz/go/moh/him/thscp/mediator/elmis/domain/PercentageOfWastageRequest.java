@@ -3,7 +3,7 @@ package tz.go.moh.him.thscp.mediator.elmis.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class StockOnHandStatusRequest {
+public class PercentageOfWastageRequest {
     /**
      * The unique identifier
      */
@@ -12,11 +12,18 @@ public class StockOnHandStatusRequest {
     private String uuid;
 
     /**
-     * The consumed quantity
+     * The damaged stock percentage
      */
-    @JsonProperty("consumedQuantity")
-    @SerializedName("consumedQuantity")
-    private int consumedQuantity;
+    @JsonProperty("damagedPercentage")
+    @SerializedName("damagedPercentage")
+    private float damagedPercentage;
+
+    /**
+     * The expired stock percentage
+     */
+    @JsonProperty("expiredPercentage")
+    @SerializedName("expiredPercentage")
+    private float expiredPercentage;
 
     /**
      * The facility HFR Id
@@ -26,18 +33,18 @@ public class StockOnHandStatusRequest {
     private String facilityId;
 
     /**
+     * The lost stock percentage
+     */
+    @JsonProperty("lostPercentage")
+    @SerializedName("lostPercentage")
+    private float lostPercentage;
+
+    /**
      * The facilityLevel
      */
     @JsonProperty("facilityLevel")
     @SerializedName("facilityLevel")
     private int facilityLevel;
-
-    /**
-     * The months of stock
-     */
-    @JsonProperty("monthsOfStock")
-    @SerializedName("monthsOfStock")
-    private int monthsOfStock;
 
     /**
      * The period date
@@ -67,13 +74,6 @@ public class StockOnHandStatusRequest {
     @SerializedName("quantity")
     private int quantity;
 
-    /**
-     * The stock Id
-     */
-    @JsonProperty("stockId")
-    @SerializedName("stockId")
-    private String stockId;
-
     public String getUuid() {
         return uuid;
     }
@@ -82,14 +82,22 @@ public class StockOnHandStatusRequest {
         this.uuid = uuid;
     }
 
-    public int getConsumedQuantity() {
-        return consumedQuantity;
+
+    public float getDamagedPercentage() {
+        return damagedPercentage;
     }
 
-    public void setConsumedQuantity(int consumedQuantity) {
-        this.consumedQuantity = consumedQuantity;
+    public void setDamagedPercentage(float damagedPercentage) {
+        this.damagedPercentage = damagedPercentage;
     }
 
+    public float getExpiredPercentage() {
+        return expiredPercentage;
+    }
+
+    public void setExpiredPercentage(float expiredPercentage) {
+        this.expiredPercentage = expiredPercentage;
+    }
 
     public String getFacilityId() {
         return facilityId;
@@ -99,20 +107,20 @@ public class StockOnHandStatusRequest {
         this.facilityId = facilityId;
     }
 
+    public float getLostPercentage() {
+        return lostPercentage;
+    }
+
+    public void setLostPercentage(float lostPercentage) {
+        this.lostPercentage = lostPercentage;
+    }
+
     public int getFacilityLevel() {
         return facilityLevel;
     }
 
     public void setFacilityLevel(int facilityLevel) {
         this.facilityLevel = facilityLevel;
-    }
-
-    public int getMonthsOfStock() {
-        return monthsOfStock;
-    }
-
-    public void setMonthsOfStock(int monthsOfStock) {
-        this.monthsOfStock = monthsOfStock;
     }
 
     public String getPeriod() {
@@ -145,13 +153,5 @@ public class StockOnHandStatusRequest {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getStockId() {
-        return stockId;
-    }
-
-    public void setStockId(String stockId) {
-        this.stockId = stockId;
     }
 }

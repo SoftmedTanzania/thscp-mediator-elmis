@@ -68,6 +68,13 @@
       "type": "http"
     },
     {
+      "name": "eLMIS - THSCP Percentage Of Wastage Route",
+      "host": "localhost",
+      "port": "3017",
+      "path": "/thscp-percentage-of-wastage",
+      "type": "http"
+    },
+    {
       "name": "eLMIS - THSCP Product List Route",
       "host": "localhost",
       "port": "3017",
@@ -222,7 +229,7 @@
     },
     {
       "name": "eLMIS - THSCP Stock On Hand Channel",
-      "urlPattern": "^/thscp-stock-on-hand$",
+      "urlPattern": "^/elmis-thscp-stock-on-hand$",
       "type": "http",
       "allow": [
         "elmis-role"
@@ -235,6 +242,23 @@
           "path": "/thscp-stock-on-hand",
           "type": "http",
           "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "eLMIS - THSCP Percentage Of Wastage Channel",
+      "urlPattern": "^/elmis-thscp-percentage-of-wastage$",
+      "type": "http",
+      "allow": [
+        "elmis-role"
+      ],
+      "routes": [
+        {
+          "name": "eLMIS - THSCP Percentage Of Wastage Route",
+          "host": "localhost",
+          "port": "3017",
+          "path": "/thscp-percentage-of-wastage",
+          "type": "http"
         }
       ]
     },

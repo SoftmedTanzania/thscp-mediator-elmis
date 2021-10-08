@@ -4,16 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.testing.MockHTTPConnector;
 import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
-import tz.go.moh.him.thscp.mediator.elmis.domain.EmergencyCommodityStockStatusRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.ForecastAccuracyPerProgramRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.LaboratoryDiagnosticEquipmentFunctionalityRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfReportsAndRequisitionsRejectedRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.PharmaceuticalAndLaboratoryPersonnelRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.ProductListRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.ReportingTimelinessRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.StockAvailabilityRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.TurnAroundTimeRequest;
+import tz.go.moh.him.thscp.mediator.elmis.domain.*;
 import tz.go.moh.him.thscp.mediator.elmis.orchestrator.EmergencyCommodityStockStatusOrchestratorTest;
 import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
@@ -148,11 +139,8 @@ public class MockDestination extends MockHTTPConnector {
             case Constants.STOCK_ON_HAND_STATUS_REQUEST:
                 List<StockOnHandStatusRequest> stockOnHandStatusRequests = Arrays.asList(serializer.deserialize(msg.getBody(), StockOnHandStatusRequest[].class));
                 assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockOnHandStatusRequests.get(0).getUuid());
-                assertEquals(0, stockOnHandStatusRequests.get(0).getDamagedPercentage(), 0.001);
                 assertEquals(10, stockOnHandStatusRequests.get(0).getConsumedQuantity());
-                assertEquals(0, stockOnHandStatusRequests.get(0).getExpiredPercentage(), 0.001);
                 assertEquals("106091-2", stockOnHandStatusRequests.get(0).getFacilityId());
-                assertEquals(0, stockOnHandStatusRequests.get(0).getLostPercentage(), 0.001);
                 assertEquals(0, stockOnHandStatusRequests.get(0).getFacilityLevel());
                 assertEquals(10, stockOnHandStatusRequests.get(0).getMonthsOfStock());
                 assertEquals("2020-12-07", stockOnHandStatusRequests.get(0).getPeriod());
@@ -160,6 +148,19 @@ public class MockDestination extends MockHTTPConnector {
                 assertEquals("PC-01", stockOnHandStatusRequests.get(0).getProgramCode());
                 assertEquals(100, stockOnHandStatusRequests.get(0).getQuantity());
                 assertEquals("001", stockOnHandStatusRequests.get(0).getStockId());
+                break;
+            case Constants.PERCENTAGE_OF_WASTAGE:
+                List<PercentageOfWastageRequest> percentageOfWastageRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PercentageOfWastageRequest[].class));
+                assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", percentageOfWastageRequests.get(0).getUuid());
+                assertEquals(0, percentageOfWastageRequests.get(0).getDamagedPercentage(), 0.001);
+                assertEquals(0, percentageOfWastageRequests.get(0).getExpiredPercentage(), 0.001);
+                assertEquals("106091-2", percentageOfWastageRequests.get(0).getFacilityId());
+                assertEquals(0, percentageOfWastageRequests.get(0).getLostPercentage(), 0.001);
+                assertEquals(0, percentageOfWastageRequests.get(0).getFacilityLevel());
+                assertEquals("2020-12-07", percentageOfWastageRequests.get(0).getPeriod());
+                assertEquals("PR-01", percentageOfWastageRequests.get(0).getProductCode());
+                assertEquals("PC-01", percentageOfWastageRequests.get(0).getProgramCode());
+                assertEquals(100, percentageOfWastageRequests.get(0).getQuantity());
                 break;
             case Constants.TURN_AROUND_TIME_REQUEST:
                 List<TurnAroundTimeRequest> turnAroundTimeRequests = Arrays.asList(serializer.deserialize(msg.getBody(), TurnAroundTimeRequest[].class));

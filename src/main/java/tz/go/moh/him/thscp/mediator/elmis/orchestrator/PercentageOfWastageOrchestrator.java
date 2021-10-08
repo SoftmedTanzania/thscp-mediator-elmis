@@ -5,7 +5,6 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.thscp.mediator.elmis.domain.PercentageOfWastageRequest;
-import tz.go.moh.him.thscp.mediator.elmis.domain.StockOnHandStatusRequest;
 import tz.go.moh.him.thscp.mediator.elmis.utils.Constants;
 
 import java.util.ArrayList;

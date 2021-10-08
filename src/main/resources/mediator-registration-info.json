@@ -331,6 +331,12 @@
           "type": "string"
         },
         {
+          "param": "destinationPathPercentageOfWastage",
+          "displayName": "Destination Path for Percentage of Wastage",
+          "description": "The destination path for receiving  Percentage of Wastage",
+          "type": "string"
+        },
+        {
           "param": "destinationPathProductList",
           "displayName": "Destination Path for Product List",
           "description": "The destination path for receiving Product List",
